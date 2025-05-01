@@ -1,0 +1,40 @@
+# --- GLOBAL ---
+.idea/
+*.iml
+*.log
+.DS_Store
+.env
+node_modules/
+dist/
+temp/
+tmp/
+.vscode/
+*.swp
+
+# --- BACKEND (Spring Boot - Maven + Java) ---
+/backend/target/
+/backend/.classpath
+/backend/.project
+/backend/.settings/
+/backend/.mvn/
+/backend/mvnw
+/backend/mvnw.cmd
+/backend/hs_err_pid*
+/backend/*.log
+
+# --- FRONTEND (Vue 3 + Ionic + Vite) ---
+/frontend/node_modules/
+/frontend/.output/
+/frontend/.vitepress/
+/frontend/.cache/
+/frontend/dist/
+/frontend/.env.*
+/frontend/.idea/
+/frontend/.DS_Store
+
+# --- TEST/DEV ---
+*.h2.db
+*.mv.db
+*.sqlite
+/test-output/
+coverage/
