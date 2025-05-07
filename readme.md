@@ -1,4 +1,4 @@
-# 🃏 TwentyOne – Blackjack als Web-App
+# 🃏 TwentyOne – Blackjack als Mobile-App
 
 Dies ist das GitHub-Repository für unser AWT-Projekt **TwentyOne** – eine Singleplayer-Blackjack-Anwendung mit Vue 3 (Ionic) im Frontend und Spring Boot im Backend.
 
