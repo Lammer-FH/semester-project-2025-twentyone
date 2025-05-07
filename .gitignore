@@ -38,3 +38,5 @@ tmp/
 *.sqlite
 /test-output/
 coverage/
+/.AU.xioxx.nosync/
+/.AU.aikJ2.nosync/
