@@ -1,6 +1,7 @@
 # --- GLOBAL ---
 .idea/
 *.iml
+*.ipr
 *.log
 .DS_Store
 .env
@@ -10,6 +11,16 @@ temp/
 tmp/
 .vscode/
 *.swp
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 # --- BACKEND (Spring Boot - Maven + Java) ---
 /backend/target/
@@ -21,6 +32,11 @@ tmp/
 /backend/mvnw.cmd
 /backend/hs_err_pid*
 /backend/*.log
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # --- FRONTEND (Vue 3 + Ionic + Vite) ---
 /frontend/node_modules/
@@ -40,3 +56,12 @@ tmp/
 coverage/
 /.AU.xioxx.nosync/
 /.AU.aikJ2.nosync/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
