@@ -13,11 +13,54 @@ Details zur Projektidee, Ressourcen und User Stories findest du hier:
 ## ⚙️ Tech-Stack
 
 - **Frontend**: Ionic + Vue 3 + Pinia + Axios
-- **Backend**: Java 17 + Spring Boot + JPA
+- **Backend**: Java 21 + Spring Boot + JPA
 - **Datenbank**: H2 (Dev), PostgreSQL (optional)
 - **Architektur**: Clean Architecture (Domain/UseCase/API Layering)
 - **Design Tools**: Figma (optional), Paper Prototypes
 - **Management**: GitHub Projects (Kanban), Issues, Pull Requests
+
+## 🚀 Projekt ausführen
+
+### 🔧 Voraussetzungen
+
+- Java 21
+- Node.js + npm
+- Ionic CLI (`npm install -g @ionic/cli`)
+- Maven 3.9+
+
+### ▶️ Projekt bauen
+
+auf root:
+
+```bash
+mvn clean install
+```
+
+### ▶️ Backend starten
+
+```bash
+cd server
+./mvn clean install spring-boot:run
+```
+
+### ▶️ Backend debuggen
+```bash
+cd server
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+```
+API erreichbar unter: `http://localhost:8080` + 🟡 BASEURL MUSS NOCH GEMACHT WERDEN
+
+### 📱 Frontend starten
+
+```bash
+cd client
+npm install
+ionic serve
+```
+
+App erreichbar unter: `http://localhost:8100`
+
+---
 
 ## 🚧 Projektstatus
 
