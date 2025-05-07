@@ -8,7 +8,7 @@ Ein simples Blackjack-Spiel ("Twenty One") gegen einen virtuellen Dealer.
 Ziel ist es, das Spiel vollständig als mobile-first Web-App umzusetzen – mit REST-API, sauberem Code und gutem Design.
 
 Details zur Projektidee, Ressourcen und User Stories findest du hier:  
-👉 [Projektbeschreibung & Spezifikation (Google Docs)](https://docs.google.com/...) // TODO
+👉 [Projektbeschreibung & Spezifikation (Google Docs)](https://docs.google.com/document/d/1y2g-sIxQuOhFQXfiXVY2fNWwhQiEoZoPI1cMuAEVLB4/edit?usp=sharing)
 
 ## ⚙️ Tech-Stack
 
