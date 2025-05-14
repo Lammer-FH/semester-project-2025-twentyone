@@ -1,7 +1,6 @@
 {
   "name": "twentyone",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +12,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ionic/vue": "^8.5.7",
+    "@ionic/vue-router": "^8.5.7",
+    "ionicons": "^8.0.8",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
