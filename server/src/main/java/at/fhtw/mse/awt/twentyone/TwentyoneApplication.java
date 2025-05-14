@@ -1,13 +1,13 @@
-package at.fhtw.mse.awt.tewntyone;
+package at.fhtw.mse.awt.twentyone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TewntyoneApplication {
+public class TwentyoneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TewntyoneApplication.class, args);
+		SpringApplication.run(TwentyoneApplication.class, args);
 	}
 
 }
