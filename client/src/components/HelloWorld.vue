@@ -5,37 +5,37 @@ defineProps<{
 </script>
 
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
-    </h3>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ msg }}</ion-card-title>
+      <ion-card-subtitle>Ein Test mit Ionic Komponenten</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" color="primary"> Klick mich </ion-button>
+
+      <ion-toggle justify="space-between" class="ion-margin-top"> Schalter </ion-toggle>
+
+      <ion-input label="Name" label-placement="floating" placeholder="Dein Name"></ion-input>
+
+      <ion-item>
+        <ion-label>Beispiel Select</ion-label>
+        <ion-select interface="popover" placeholder="Waehlen">
+          <ion-select-option value="1">Option A</ion-select-option>
+          <ion-select-option value="2">Option B</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+ion-card-title {
+  font-size: 1.8rem;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+ion-card-subtitle {
+  font-size: 1rem;
+  color: var(--ion-color-medium);
 }
 </style>
