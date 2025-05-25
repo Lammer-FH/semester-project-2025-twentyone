@@ -55,10 +55,10 @@ API erreichbar unter: `http://localhost:8080` + 🟡 BASEURL MUSS NOCH GEMACHT W
 ```bash
 cd client
 npm install
-ionic serve
+npm run dev
 ```
 
-App erreichbar unter: `http://localhost:8100`
+App erreichbar unter: `http://localhost:5173`
 
 ---
 
