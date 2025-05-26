@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MoveRepository extends JpaRepository<Move, Long> {
-    List<Move> findByGameSession(Long gameSessionId);
+    List<Move> findByGameSession_GameSessionId(Long gameSessionId);
 }

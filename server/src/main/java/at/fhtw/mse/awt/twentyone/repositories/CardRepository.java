@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
-    List<Card> findByGameSession(Long gameSessionId);
+    List<Card> findByGameSession_GameSessionId(Long gameSessionId);
 }
