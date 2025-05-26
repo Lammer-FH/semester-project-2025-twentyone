@@ -1,44 +1,90 @@
-<script setup lang="ts">
-import { reactive } from 'vue';
-
-import { storeToRefs } from 'pinia';
-
-import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardContent } from '@ionic/vue';
-
-import useStore from '../stores/main';
-
-const mainStore = useStore();
-
-const { welcomeText } = storeToRefs(mainStore);
-// If you do not want to use 'welcomeText.value', wrap it in a reactive object.
-// It can be easier for people migrating from vue 2.
-const data = reactive({
-	introductionText: welcomeText.value
-});
-
-// eslint-disable-next-line no-console
-if (data.introductionText === welcomeText.value) console.log(data.introductionText);
-</script>
-
 <template>
-	<base-view id="home-page">
-		<template #default-view-title>
-			<div class="text-center">Home Page</div>
-		</template>
-		<template #default-view-body>
-			<div class="row welcome-page">
-				<ion-card class="col-xl-4 col-lg-5 col-md-5 col-sm-6 col-12">
-					<ion-card-header>
-						<ion-card-subtitle>First Page</ion-card-subtitle>
-						<ion-card-title>Welcome Home</ion-card-title>
-					</ion-card-header>
+  <IonPage>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>TwentyOne</IonTitle>
+      </IonToolbar>
+    </IonHeader>
 
-					<ion-card-content class="text-center">
-						<p>{{ welcomeText }}</p>
-						<ion-button class="pt-1" router-link="/about">Click Me</ion-button>
-					</ion-card-content>
-				</ion-card>
-			</div>
-		</template>
-	</base-view>
+    <IonContent class="ion-padding">
+      <IonGrid class="ion-justify-content-center ion-align-items-center" style="height: 100%">
+        <IonRow>
+          <IonCol size="12" size-md="6">
+            <div class="ion-text-center">
+              <IonButton expand="block" class="ion-margin-bottom" @click="startGame">
+                <template v-slot:start>
+                  <IonIcon name="play-circle-outline" />
+                </template>
+                Start Game
+              </IonButton>
+
+              <IonButton expand="block" class="ion-margin-bottom" @click="viewResults">
+                <template v-slot:start>
+                  <IonIcon name="trophy-outline" />
+                </template>
+                Game Results
+              </IonButton>
+
+              <IonButton expand="block" class="ion-margin-bottom" @click="goProfile">
+                <template v-slot:start>
+                  <IonIcon name="person-circle-outline" />
+                </template>
+                Profile
+              </IonButton>
+
+              <br />
+
+              <IonButton expand="block" class="ion-margin-bottom" @click="viewRules">
+                <template v-slot:start>
+                  <IonIcon name="help-circle-outline" />
+                </template>
+                Rules
+              </IonButton>
+
+              <IonButton expand="block" @click="logout">
+                <template v-slot:start>
+                  <IonIcon name="log-out-outline" />
+                </template>
+                Logout
+              </IonButton>
+            </div>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </IonContent>
+  </IonPage>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/vue'
+
+const router = useRouter()
+
+function startGame() {
+  router.push({ name: 'game', params: { id: 1 } })
+}
+function viewResults() {
+  /* feat View Game Result #1 */
+}
+function goProfile() {
+  /* feat. Player Profile #4 */
+}
+function viewRules() {
+  /* feat. static page #2 */
+}
+function logout() {
+  /* ML TODO */
+}
+</script>
