@@ -64,8 +64,8 @@ App erreichbar unter: `http://localhost:5173`
 
 ## 🚧 Projektstatus
 
-🟡 In Planung  
-🔜 User Stories und API-Spezifikation
+🟡 In Arbeit  
+🔜 User Stories 1-3
 
 ## 👥 Team
 
