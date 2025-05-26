@@ -44,11 +44,20 @@ cd server
 ```
 
 ### ▶️ Backend debuggen
+
+Um das Backend im Debug-Modus zu starten, führe folgenden Befehl im `server`-Verzeichnis aus:
+
 ```bash
 cd server
 ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 ```
-API erreichbar unter: `http://localhost:8080` + 🟡 BASEURL MUSS NOCH GEMACHT WERDEN
+
+Die Anwendung hält beim start nicht an, bis ihr euch auf den Debugger Port `5005` verbindet.  
+Zum debuggen müsst ihr euch eine jvm mit dem Port `5005` konfigurieren. 
+
+API erreichbar unter:  
+`http://localhost:8080/twentyone/api/` und dann der jeweilige Controller.
+
 
 ### 📱 Frontend starten
 
