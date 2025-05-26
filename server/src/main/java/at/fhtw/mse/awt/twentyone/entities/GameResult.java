@@ -22,7 +22,7 @@ public class GameResult {
     private GameSession gameSession;
 
     @Column(nullable = false)
-    private String outcome;
+    private Outcome outcome;
 
     @Column(nullable = false)
     private BigDecimal payout;
