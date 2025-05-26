@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import Index from '@/pages/Index.vue'
 import About from '@/pages/About.vue'
+import Game from '@/pages/Game.vue'
 
 const routes = [
   {
@@ -10,6 +11,11 @@ const routes = [
   {
     path: '/about',
     component: About,
+  },
+  {
+    path: '/game/:id',
+    component: Game,
+    props: true,
   },
 ]
 
