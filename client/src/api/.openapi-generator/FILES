@@ -1,0 +1,11 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/GameSessionControllerApi.md
+docs/GameSessionDto.md
+git_push.sh
+index.ts
