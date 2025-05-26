@@ -21,6 +21,7 @@ public class GameResult {
     @JoinColumn(name = "game_session_id")
     private GameSession gameSession;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Outcome outcome;
 
