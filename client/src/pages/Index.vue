@@ -88,11 +88,3 @@ function logout() {
   /* ML TODO */
 }
 </script>
-<style scoped>
-// ML TODO: Martins Styling wieder einbauen
-.button-container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-</style>
