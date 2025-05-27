@@ -82,9 +82,17 @@ function goProfile() {
   /* feat. Player Profile #4 */
 }
 function viewRules() {
-  /* feat. static page #2 */
+  router.push({ name: 'rules' })
 }
 function logout() {
   /* ML TODO */
 }
 </script>
+<style scoped>
+// ML TODO: Martins Styling wieder einbauen
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+</style>
