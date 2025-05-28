@@ -3,6 +3,7 @@ import Index from '@/pages/Index.vue'
 import About from '@/pages/About.vue'
 import Game from '@/pages/Game.vue'
 import Rules from '@/pages/Rules.vue'
+import GameResult from '@/pages/GameResult.vue'
 
 const routes = [
   {
@@ -23,6 +24,12 @@ const routes = [
     path: '/rules',
     name: 'rules',
     component: Rules,
+  },
+  {
+    path: '/game-result/:sessionId',
+    name: 'game-result',
+    component: GameResult,
+    props: true,
   },
 ]
 

@@ -76,7 +76,7 @@ function startGame() {
   router.push({ name: 'game', params: { id: 1 } })
 }
 function viewResults() {
-  /* feat View Game Result #1 */
+  router.push({ name: 'game-result', params: { sessionId: 1 } })
 }
 function goProfile() {
   /* feat. Player Profile #4 */
