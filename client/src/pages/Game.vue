@@ -16,25 +16,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
 
 import DealerHand from '@/components/game/DealerHand.vue'
 import PlayerHand from '@/components/game/PlayerHand.vue'
 import ScoreDisplay from '@/components/game/ScoreDisplay.vue'
 import ActionButtons from '@/components/game/ActionButtons.vue'
+import { useRoute } from 'vue-router'
+import type { GameSessionDto } from '@/api'
+import { fetchGameSession } from '@/services/game-session.service.ts'
 
-// mocks
-const session = ref({
-  id: 1,
-  playerCards: ['AH', '7D'],
-  dealerCards: ['10C'],
-  playerScore: 18,
+const route = useRoute()
+const session = ref<GameSessionDto | null>(null)
+const dealerCards = computed(() => session.value?.dealerCards ?? [])
+const playerCards = computed(() => session.value?.playerCards ?? [])
+const playerScore = computed(() => session.value?.playerScore ?? 0)
+
+// Daten aus BE fetchen
+onMounted(async () => {
+  const id = Number(route.params.id)
+  session.value = await fetchGameSession(id)
 })
-
-const dealerCards = computed(() => session.value.dealerCards)
-const playerCards = computed(() => session.value.playerCards)
-const playerScore = computed(() => session.value.playerScore)
 
 // aktuell mal noch mit mocks
 function onHit() {
