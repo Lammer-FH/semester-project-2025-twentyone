@@ -17,8 +17,8 @@ public class GameResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gameResultId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "game_session_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_session_id", referencedColumnName = "gameSessionId", unique = true) // Ensure unique FK
     private GameSession gameSession;
 
     @Enumerated(EnumType.STRING)
