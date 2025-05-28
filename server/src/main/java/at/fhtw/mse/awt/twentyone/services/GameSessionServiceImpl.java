@@ -2,24 +2,25 @@ package at.fhtw.mse.awt.twentyone.services;
 
 import at.fhtw.mse.awt.twentyone.dtos.GameSessionDto;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
+import at.fhtw.mse.awt.twentyone.interfaces.GameSessionService;
 import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
-import jakarta.persistence.EntityNotFoundException; // Or a custom exception
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Good practice for read-only operations
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 
 @Service
-public class GameSessionService {
+public class GameSessionServiceImpl implements GameSessionService {
 
     private final GameSessionRepository gameSessionRepository;
 
     // Constructor injection for the repository
-    public GameSessionService(GameSessionRepository gameSessionRepository) {
+    public GameSessionServiceImpl(GameSessionRepository gameSessionRepository) {
         this.gameSessionRepository = gameSessionRepository;
     }
 
     @Transactional(readOnly = true)
+    @Override
     public GameSessionDto getGameSessionState(Long sessionId) {
         GameSession gameSession = gameSessionRepository.findById(sessionId)
                 .orElseThrow(() -> new EntityNotFoundException("GameSession not found with id: " + sessionId));
