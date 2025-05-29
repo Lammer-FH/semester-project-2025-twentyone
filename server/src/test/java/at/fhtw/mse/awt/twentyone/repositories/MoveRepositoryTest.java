@@ -35,7 +35,7 @@ class MoveRepositoryTest {
         List<Move> result = moveRepository.findByGameSession_GameSessionId(session.getGameSessionId());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getMoveType()).isEqualTo("hit");
-        assertThat(result.get(0).getGameSession().getGameSessionId()).isEqualTo(session.getGameSessionId());
+        assertThat(result.getFirst().getMoveType()).isEqualTo("hit");
+        assertThat(result.getFirst().getGameSession().getGameSessionId()).isEqualTo(session.getGameSessionId());
     }
 }

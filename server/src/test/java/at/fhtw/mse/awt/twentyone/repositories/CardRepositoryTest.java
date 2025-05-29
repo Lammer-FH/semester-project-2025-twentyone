@@ -36,7 +36,7 @@ class CardRepositoryTest {
         List<Card> result = cardRepository.findByGameSession_GameSessionId(session.getGameSessionId());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getRank()).isEqualTo("A");
-        assertThat(result.get(0).getSuit()).isEqualTo("HEARTS");
+        assertThat(result.getFirst().getRank()).isEqualTo("A");
+        assertThat(result.getFirst().getSuit()).isEqualTo("HEARTS");
     }
 }

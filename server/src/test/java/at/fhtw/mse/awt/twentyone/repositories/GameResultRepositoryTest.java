@@ -38,7 +38,7 @@ class GameResultRepositoryTest {
         List<GameResult> results = gameResultRepository.findByOutcome(Outcome.WIN);
 
         assertThat(results).isNotEmpty();
-        assertThat(results.get(0).getOutcome()).isEqualTo(Outcome.WIN);
+        assertThat(results.getFirst().getOutcome()).isEqualTo(Outcome.WIN);
     }
 
     @Test
