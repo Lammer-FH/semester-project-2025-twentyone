@@ -14,35 +14,26 @@
 
     <IonContent class="ion-padding">
       <div class="game-results-content">
-        <section class="result-section">
-          <h2>Total Win/Loss</h2>
-          <div class="stats">
-            <div class="stat-item">
-              <strong>{{ gameResults?.totalWins || 0 }}</strong>
-              <span>Wins</span>
+        <section class="result-section" v-if="gameResult">
+          <h2>Game Outcome</h2>
+          <div class="game-info">
+            <div class="outcome-display">
+              <span class="game-result" :class="gameResult.outcome">{{ gameResult.outcome }}</span>
             </div>
-            <div class="stat-item">
-              <strong>{{ gameResults?.totalLosses || 0 }}</strong>
-              <span>Losses</span>
+            <div class="payout-display">
+              <strong>Payout:</strong>
+              <span class="payout-amount">${{ gameResult.payout.toFixed(2) }}</span>
             </div>
           </div>
         </section>
-
-        <section class="result-section">
-          <h2>Previous Games</h2>
-          <div v-if="gameResults?.games?.length" class="games-list">
-            <div v-for="game in gameResults.games" :key="game.id" class="game-item">
-              <div class="game-info">
-                <span class="game-result" :class="game.result">{{ game.result }}</span>
-                <span class="game-score">Score: {{ game.playerScore }}</span>
-                <span class="game-date">{{ new Date(game.playedAt).toLocaleDateString() }}</span>
-              </div>
-            </div>
-          </div>
-          <div v-else class="no-games">
-            No games played yet
-          </div>
-        </section>
+        <div v-else-if="hasError" class="error-message">
+          <IonIcon :icon="alertCircleOutline" class="error-icon"></IonIcon>
+          <p>Unable to load game results</p>
+          <IonButton router-link="/" class="ion-margin-top">Return to Home</IonButton>
+        </div>
+        <div v-else class="no-result">
+          Loading game result...
+        </div>
       </div>
     </IonContent>
   </IonPage>
@@ -60,34 +51,38 @@ import {
   IonBackButton,
   IonButtons,
   IonIcon,
+  IonButton,
 } from '@ionic/vue'
-import { trophyOutline } from 'ionicons/icons'
+import { trophyOutline, alertCircleOutline } from 'ionicons/icons'
 import axios from 'axios'
 import { BASE_PATH } from '@/api/base'
+import { showToast } from '@/composables/useToast'
 
-interface Game {
+interface GameResult {
   id: number
-  result: 'WIN' | 'LOSS' | 'PUSH'
-  playerScore: number
-  playedAt: string
-}
-
-interface GameResults {
-  totalWins: number
-  totalLosses: number
-  games: Game[]
+  gameSessionId: number
+  outcome: string
+  payout: number
 }
 
 const route = useRoute()
-const gameResults = ref<GameResults | null>(null)
+const gameResult = ref<GameResult | null>(null)
+const hasError = ref(false)
 
 onMounted(async () => {
   try {
     const sessionId = route.params.sessionId
-    const response = await axios.get<GameResults>(`${BASE_PATH}/game-sessions/${sessionId}/game-results`)
-    gameResults.value = response.data
-  } catch (error) {
-    console.error('Failed to fetch game results:', error)
+    const response = await axios.get<GameResult>(`${BASE_PATH}/game-sessions/${sessionId}/game-results`)
+    gameResult.value = response.data
+    hasError.value = false
+  } catch (error: any) {
+    hasError.value = true
+    if (error.response?.status === 404) {
+      await showToast('Game session not found', 'danger')
+    } else {
+      await showToast('Failed to fetch game result', 'danger')
+    }
+    console.error('Failed to fetch game result:', error)
   }
 })
 </script>
@@ -99,18 +94,6 @@ onMounted(async () => {
   padding: 20px;
 }
 
-h1 {
-  color: var(--ion-color-primary);
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  color: var(--ion-color-primary);
-  margin: 25px 0 15px;
-  font-size: 1.5em;
-}
-
 .result-section {
   margin-bottom: 30px;
   padding: 20px;
@@ -119,77 +102,72 @@ h2 {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-item strong {
-  display: block;
-  font-size: 2em;
+h2 {
   color: var(--ion-color-primary);
-}
-
-.stat-item span {
-  color: var(--ion-color-medium);
-}
-
-.games-list {
-  margin-top: 20px;
-}
-
-.game-item {
-  padding: 15px;
-  border-bottom: 1px solid var(--ion-color-light);
-}
-
-.game-item:last-child {
-  border-bottom: none;
+  margin: 0 0 20px;
+  text-align: center;
 }
 
 .game-info {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 20px;
+}
+
+.outcome-display {
+  text-align: center;
 }
 
 .game-result {
+  font-size: 1.5em;
   font-weight: bold;
-  padding: 4px 8px;
+  padding: 8px 16px;
   border-radius: 4px;
 }
 
 .game-result.WIN {
-  color: var(--ion-color-success);
-  background: var(--ion-color-success-tint);
+  color: #ffffff;
+  background: var(--ion-color-success);
+  font-weight: bold;
 }
 
 .game-result.LOSS {
-  color: var(--ion-color-danger);
-  background: var(--ion-color-danger-tint);
+  color: #ffffff;
+  background: var(--ion-color-danger);
+  font-weight: bold;
 }
 
-.game-result.PUSH {
-  color: var(--ion-color-warning);
-  background: var(--ion-color-warning-tint);
+.payout-display {
+  font-size: 1.2em;
+  text-align: center;
 }
 
-.game-score {
-  color: var(--ion-color-dark);
+.payout-amount {
+  color: var(--ion-color-success);
+  margin-left: 8px;
+  font-weight: bold;
 }
 
-.game-date {
-  color: var(--ion-color-medium);
-}
-
-.no-games {
+.no-result {
   text-align: center;
   color: var(--ion-color-medium);
   padding: 20px;
+}
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--ion-color-danger);
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-message p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 </style> 
