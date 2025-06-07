@@ -1,17 +1,17 @@
-package at.fhtw.mse.awt.twentyone.dtos;
+package at.fhtw.mse.awt.twentyone.dtos.Move;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameResultDto {
+public class MoveDto {
     private Long id;
     private Long gameSessionId;
-    private String outcome;
-    private BigDecimal payout;
+    private String moveType;
+    private LocalDateTime occuredAt;
 }

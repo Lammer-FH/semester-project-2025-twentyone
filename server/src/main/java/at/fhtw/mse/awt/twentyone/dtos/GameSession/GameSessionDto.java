@@ -1,4 +1,4 @@
-package at.fhtw.mse.awt.twentyone.dtos;
+package at.fhtw.mse.awt.twentyone.dtos.GameSession;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
