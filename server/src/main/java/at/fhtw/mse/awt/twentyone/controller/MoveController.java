@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.MoveDto;
+import at.fhtw.mse.awt.twentyone.dtos.Move.MoveDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

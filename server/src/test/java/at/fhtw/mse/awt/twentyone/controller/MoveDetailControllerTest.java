@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.MoveDto;
+import at.fhtw.mse.awt.twentyone.dtos.Move.MoveDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

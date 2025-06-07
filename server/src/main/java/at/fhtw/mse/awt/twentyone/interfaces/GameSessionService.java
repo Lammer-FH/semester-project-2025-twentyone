@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.interfaces;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
 
 /**
  * Service interface for retrieving game session state.

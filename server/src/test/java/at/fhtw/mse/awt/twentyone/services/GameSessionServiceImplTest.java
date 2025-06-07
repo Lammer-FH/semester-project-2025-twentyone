@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
 import jakarta.persistence.EntityNotFoundException;

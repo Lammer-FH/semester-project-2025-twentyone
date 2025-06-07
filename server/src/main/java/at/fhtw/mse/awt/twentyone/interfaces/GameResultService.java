@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.interfaces;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.GameResult.GameResultDto;
 
 /**
  * Service interface for retrieving game results.

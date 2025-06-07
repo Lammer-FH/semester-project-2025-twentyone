@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
 import at.fhtw.mse.awt.twentyone.interfaces.GameSessionService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
