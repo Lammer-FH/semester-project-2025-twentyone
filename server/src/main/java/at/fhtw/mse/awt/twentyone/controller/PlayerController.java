@@ -1,16 +1,28 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.PlayerDto;
+import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerDto;
+import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerRequestDto;
+import at.fhtw.mse.awt.twentyone.interfaces.PlayerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/players")
 @Tag(name = "Player", description = "Player profile management")
 public class PlayerController {
+
+    private final PlayerService playerService;
+
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
+    }
 
     @Operation(summary = "Get player by ID")
     @ApiResponses({
@@ -19,27 +31,28 @@ public class PlayerController {
     })
     @GetMapping("/{id}")
     public PlayerDto getPlayer(@PathVariable Long id) {
-        return new PlayerDto(id, "player123", "John Doe");
+
+        return playerService.getPlayer(id);
     }
 
     @Operation(summary = "Create new player")
     @ApiResponse(responseCode = "201", description = "Player created")
     @PostMapping
-    public PlayerDto createPlayer(@RequestBody PlayerDto playerDto) {
-        return playerDto;
+    public PlayerDto createPlayer(@RequestBody PlayerRequestDto playerRequestDto) {
+        return playerService.createPlayer(playerRequestDto);
     }
 
     @Operation(summary = "Update player by ID")
     @ApiResponse(responseCode = "200", description = "Player updated")
     @PutMapping("/{id}")
-    public PlayerDto updatePlayer(@PathVariable Long id, @RequestBody PlayerDto playerDto) {
-        return new PlayerDto(id, playerDto.getUserName(), playerDto.getName());
+    public PlayerDto updatePlayer(@PathVariable Long id, @RequestBody PlayerRequestDto playerRequestDto) {
+        return playerService.updatePlayer(id, playerRequestDto);
     }
 
     @Operation(summary = "Delete player by ID")
     @ApiResponse(responseCode = "204", description = "Player deleted")
     @DeleteMapping("/{id}")
     public void deletePlayer(@PathVariable Long id) {
-        // delete logic
+        playerService.deletePlayer(id);
     }
 }
