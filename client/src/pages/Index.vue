@@ -69,6 +69,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/vue'
+import { logout as authLogout } from '@/stores/authStore'
 
 const router = useRouter()
 
@@ -79,12 +80,13 @@ function viewResults() {
   router.push({ name: 'game-result', params: { sessionId: 1 } })
 }
 function goProfile() {
-  /* feat. Player Profile #4 */
+  router.push({ name: 'profile' })
 }
 function viewRules() {
   router.push({ name: 'rules' })
 }
 function logout() {
-  /* ML TODO */
+  authLogout()
+  router.push('/login')
 }
 </script>
