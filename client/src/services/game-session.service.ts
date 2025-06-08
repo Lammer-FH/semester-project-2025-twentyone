@@ -1,11 +1,11 @@
-import { Configuration, GameSessionControllerApi } from '@/api'
+import { Configuration, GameSessionApi } from '@/api'
 import type { GameSessionDto } from '../api/models'
 import { showToast } from '@/composables/useToast.ts'
 
 const config = new Configuration({
   basePath: import.meta.env.VITE_API_BASE_URL,
 })
-const api = new GameSessionControllerApi(config)
+const api = new GameSessionApi(config)
 /**
  * Holt den Spielstatus per API.
  */
