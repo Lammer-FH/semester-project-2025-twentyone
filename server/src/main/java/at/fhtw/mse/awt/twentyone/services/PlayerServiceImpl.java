@@ -1,7 +1,7 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerDto;
-import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.player.PlayerDto;
+import at.fhtw.mse.awt.twentyone.dtos.player.PlayerRequestDto;
 import at.fhtw.mse.awt.twentyone.entities.Player;
 import at.fhtw.mse.awt.twentyone.interfaces.PlayerService;
 import at.fhtw.mse.awt.twentyone.repositories.PlayerRepository;

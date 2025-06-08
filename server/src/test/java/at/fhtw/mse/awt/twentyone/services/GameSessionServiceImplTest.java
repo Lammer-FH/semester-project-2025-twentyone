@@ -1,8 +1,8 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionCreationRequestDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionUpdateRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionCreationRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.entities.Player;
 import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
@@ -21,7 +21,11 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class) // A more lightweight way to enable Mockito than @SpringBootTest
 class GameSessionServiceImplTest {

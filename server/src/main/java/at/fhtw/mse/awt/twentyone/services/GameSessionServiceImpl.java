@@ -1,8 +1,8 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionCreationRequestDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionUpdateRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionCreationRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.entities.Player;
 import at.fhtw.mse.awt.twentyone.interfaces.GameSessionService;

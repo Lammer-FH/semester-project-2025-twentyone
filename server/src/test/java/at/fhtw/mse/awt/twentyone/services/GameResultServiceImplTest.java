@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameResult.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
 import at.fhtw.mse.awt.twentyone.entities.GameResult;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.repositories.GameResultRepository;

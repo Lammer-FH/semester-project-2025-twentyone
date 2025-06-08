@@ -1,8 +1,8 @@
 package at.fhtw.mse.awt.twentyone.interfaces;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionCreationRequestDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionUpdateRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionCreationRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
 
 /**
  * Service interface for managing game sessions.

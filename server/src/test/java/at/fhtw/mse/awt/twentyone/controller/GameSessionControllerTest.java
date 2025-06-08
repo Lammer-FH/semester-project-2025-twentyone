@@ -1,8 +1,8 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionCreationRequestDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionDto;
-import at.fhtw.mse.awt.twentyone.dtos.GameSession.GameSessionUpdateRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionCreationRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
 import at.fhtw.mse.awt.twentyone.interfaces.GameSessionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,8 +18,12 @@ import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(GameSessionController.class)
 class GameSessionControllerTest {
