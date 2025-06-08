@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface GameResultRepository extends JpaRepository<GameResult, Long> {
     List<GameResult> findByOutcome(Outcome outcome);
-    Optional<GameResult> findByGameSession_GameSessionId(Long gameSessionId);
+    Optional<GameResult> findByGameSession_Id(Long gameSessionId);
 }

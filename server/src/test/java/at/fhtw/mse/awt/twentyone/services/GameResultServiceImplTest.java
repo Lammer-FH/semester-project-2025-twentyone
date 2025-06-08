@@ -35,7 +35,7 @@ class GameResultServiceImplTest {
         Long sessionId = 1L;
 
         GameSession session = new GameSession();
-        session.setGameSessionId(sessionId);
+        session.setId(sessionId);
 
         GameResult result = new GameResult();
         result.setGameResultId(10L);
@@ -44,7 +44,7 @@ class GameResultServiceImplTest {
         result.setPayout(BigDecimal.valueOf(50.0));
 
         when(gameSessionRepository.existsById(sessionId)).thenReturn(true);
-        when(gameResultRepository.findByGameSession_GameSessionId(sessionId)).thenReturn(Optional.of(result));
+        when(gameResultRepository.findByGameSession_Id(sessionId)).thenReturn(Optional.of(result));
 
         GameResultDto dto = gameResultService.getGameResultBySessionId(sessionId);
 

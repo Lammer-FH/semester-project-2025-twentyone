@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,10 +11,18 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class GameSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long gameSessionId;
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id", nullable = false)
+    private Player player;
+
+    @Column(nullable = false)
+    private String status;
 
     @Column(nullable = false)
     private LocalDateTime startTime;
@@ -24,8 +30,5 @@ public class GameSession {
     private LocalDateTime endTime;
 
     @OneToOne(mappedBy = "gameSession", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @ToString.Exclude
     private GameResult gameResult;
-
-
 }

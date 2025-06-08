@@ -18,7 +18,7 @@ public class GameResult {
     private Long gameResultId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_session_id", referencedColumnName = "gameSessionId", unique = true) // Ensure unique FK
+    @JoinColumn(name = "game_session_id", referencedColumnName = "Id", unique = true) // Ensure unique FK
     private GameSession gameSession;
 
     @Enumerated(EnumType.STRING)
