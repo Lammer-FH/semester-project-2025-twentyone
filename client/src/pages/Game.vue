@@ -2,9 +2,11 @@
   <IonPage>
     <IonHeader>
       <IonToolbar>
-        <IonButtons slot="start">
-          <IonBackButton default-href="/"></IonBackButton>
-        </IonButtons>
+        <template v-slot:start>
+          <IonButtons>
+            <IonBackButton default-href="/"></IonBackButton>
+          </IonButtons>
+        </template>
         <IonTitle>
           <IonIcon :icon="gameControllerOutline" class="ion-margin-end"></IonIcon>
           Play Game
@@ -16,22 +18,22 @@
       <DealerHand :cards="dealerCards" />
       <PlayerHand :cards="playerCards" />
       <ScoreDisplay :score="playerScore" />
-      <ActionButtons @hit="onHit" @stand="onStand" />
+      <ActionButtons @hit="onHit" @stand="onStand" @retry="onRetry" @result="goToResult" />
     </IonContent>
   </IonPage>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
-  IonToolbar,
-  IonButtons,
+import {
   IonBackButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
   IonIcon,
+  IonPage,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/vue'
 import { gameControllerOutline } from 'ionicons/icons'
 
@@ -39,7 +41,7 @@ import DealerHand from '@/components/game/DealerHand.vue'
 import PlayerHand from '@/components/game/PlayerHand.vue'
 import ScoreDisplay from '@/components/game/ScoreDisplay.vue'
 import ActionButtons from '@/components/game/ActionButtons.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import type { GameSessionDto } from '@/api'
 import { fetchGameSession } from '@/services/game-session.service.ts'
 
@@ -50,6 +52,8 @@ interface ExtendedGameSessionDto extends GameSessionDto {
 }
 
 const route = useRoute()
+const router = useRouter()
+
 const session = ref<ExtendedGameSessionDto | null>(null)
 const dealerCards = computed(() => session.value?.dealerCards ?? [])
 const playerCards = computed(() => session.value?.playerCards ?? [])
@@ -63,7 +67,7 @@ onMounted(async () => {
     ...gameSession,
     dealerCards: [],
     playerCards: [],
-    playerScore: 0
+    playerScore: 0,
   }
 })
 
@@ -80,6 +84,15 @@ function onStand() {
   if (session.value) {
     session.value.dealerCards.push('6S')
   }
+}
+
+function onRetry() {
+  router.push({ name: '/' })
+}
+
+function goToResult() {
+  const id = Number(route.params.id)
+  router.push({ name: 'game-result', params: { sessionId: id } })
 }
 </script>
 
