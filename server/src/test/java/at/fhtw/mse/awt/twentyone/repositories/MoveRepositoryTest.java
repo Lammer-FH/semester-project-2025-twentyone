@@ -2,11 +2,12 @@ package at.fhtw.mse.awt.twentyone.repositories;
 
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.entities.Move;
-import at.fhtw.mse.awt.twentyone.entities.Player; // 1. Import Player
+import at.fhtw.mse.awt.twentyone.entities.Player;
+import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.TestPropertySource; // 2. Import TestPropertySource
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +37,7 @@ class MoveRepositoryTest {
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
         session.setPlayer(player); // Set the required Player
-        session.setStatus("ACTIVE"); // Set the required status
+        session.setStatus(GameSessionStatus.ACTIVE); // Set the required status
         session = gameSessionRepository.save(session);
 
 

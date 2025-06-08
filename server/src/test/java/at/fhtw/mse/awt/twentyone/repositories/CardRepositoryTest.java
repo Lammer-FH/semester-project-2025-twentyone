@@ -2,12 +2,12 @@ package at.fhtw.mse.awt.twentyone.repositories;
 
 import at.fhtw.mse.awt.twentyone.entities.Card;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
-import at.fhtw.mse.awt.twentyone.entities.Player; // Import Player
+import at.fhtw.mse.awt.twentyone.entities.Player;
+import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
-
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,7 +39,7 @@ class CardRepositoryTest {
 
         // --- FIX: Step 2 - Set the required fields on the session ---
         session.setPlayer(player);
-        session.setStatus("ACTIVE");
+        session.setStatus(GameSessionStatus.ACTIVE);
 
         // Now this save will succeed
         session = gameSessionRepository.save(session);

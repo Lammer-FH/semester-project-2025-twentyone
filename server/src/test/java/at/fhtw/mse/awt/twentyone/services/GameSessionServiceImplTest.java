@@ -5,6 +5,7 @@ import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
 import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.entities.Player;
+import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
 import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
 import at.fhtw.mse.awt.twentyone.repositories.PlayerRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class) // A more lightweight way to enable Mockito than @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class GameSessionServiceImplTest {
 
     @Mock
@@ -46,7 +47,7 @@ class GameSessionServiceImplTest {
     void setUp() {
         // Create common test objects to reuse in tests
         testPlayer = new Player(10L, "tester", "Test Player", "hash");
-        testGameSession = new GameSession(1L, testPlayer, "ACTIVE", LocalDateTime.now(), null, null);
+        testGameSession = new GameSession(1L, testPlayer, GameSessionStatus.ACTIVE, LocalDateTime.now(), null, null);
     }
 
     @Test
@@ -61,7 +62,7 @@ class GameSessionServiceImplTest {
         assertThat(dto).isNotNull();
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getPlayerId()).isEqualTo(testPlayer.getPlayerId());
-        assertThat(dto.getStatus()).isEqualTo("ACTIVE");
+        assertThat(dto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE.name());
     }
 
     @Test
@@ -89,8 +90,8 @@ class GameSessionServiceImplTest {
         // Assert
         assertThat(createdDto).isNotNull();
         assertThat(createdDto.getPlayerId()).isEqualTo(testPlayer.getPlayerId());
-        assertThat(createdDto.getStatus()).isEqualTo("ACTIVE");
-        verify(gameSessionRepository, times(1)).save(any(GameSession.class)); // Verify save was called
+        assertThat(createdDto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE.name());
+        verify(gameSessionRepository, times(1)).save(any(GameSession.class));
     }
 
     @Test
@@ -103,13 +104,13 @@ class GameSessionServiceImplTest {
         assertThatThrownBy(() -> gameSessionService.createGameSession(requestDto))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessageContaining("Player not found with id: 999");
-        verify(gameSessionRepository, never()).save(any()); // Verify save was NOT called
+        verify(gameSessionRepository, never()).save(any());
     }
 
     @Test
     void testUpdateGameSession_shouldUpdateStatusAndReturnDto() {
         // Arrange
-        GameSessionUpdateRequestDto requestDto = new GameSessionUpdateRequestDto("PLAYER_WINS");
+        GameSessionUpdateRequestDto requestDto = new GameSessionUpdateRequestDto(GameSessionStatus.ENDED);
         when(gameSessionRepository.findById(1L)).thenReturn(Optional.of(testGameSession));
         when(gameSessionRepository.save(any(GameSession.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -118,8 +119,8 @@ class GameSessionServiceImplTest {
 
         // Assert
         assertThat(updatedDto).isNotNull();
-        assertThat(updatedDto.getStatus()).isEqualTo("PLAYER_WINS");
-        assertThat(updatedDto.getEndTime()).isNotNull(); // End time should be set
+        assertThat(updatedDto.getStatus()).isEqualTo(GameSessionStatus.ENDED.name());
+        assertThat(updatedDto.getEndTime()).isNotNull();
         verify(gameSessionRepository, times(1)).save(testGameSession);
     }
 

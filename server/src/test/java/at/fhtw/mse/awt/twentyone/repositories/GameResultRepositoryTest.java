@@ -2,12 +2,13 @@ package at.fhtw.mse.awt.twentyone.repositories;
 
 import at.fhtw.mse.awt.twentyone.entities.GameResult;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
-import at.fhtw.mse.awt.twentyone.entities.Outcome;
-import at.fhtw.mse.awt.twentyone.entities.Player; // 1. Import Player
+import at.fhtw.mse.awt.twentyone.entities.Player;
+import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
+import at.fhtw.mse.awt.twentyone.enums.Outcome;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.TestPropertySource; // 2. Import TestPropertySource
+import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ class GameResultRepositoryTest {
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
         session.setPlayer(player); // Set the required Player
-        session.setStatus("FINISHED"); // Set a required status
+        session.setStatus(GameSessionStatus.ENDED); // Set a required status
         gameSessionRepository.save(session);
 
 
@@ -62,7 +63,7 @@ class GameResultRepositoryTest {
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
         session.setPlayer(player); // Set the required Player
-        session.setStatus("FINISHED"); // Set a required status
+        session.setStatus(GameSessionStatus.ENDED); // Set a required status
         session = gameSessionRepository.save(session);
 
 

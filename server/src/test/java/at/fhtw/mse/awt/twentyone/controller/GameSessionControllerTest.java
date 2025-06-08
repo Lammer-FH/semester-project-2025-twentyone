@@ -3,6 +3,7 @@ package at.fhtw.mse.awt.twentyone.controller;
 import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionCreationRequestDto;
 import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionDto;
 import at.fhtw.mse.awt.twentyone.dtos.gameSession.GameSessionUpdateRequestDto;
+import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
 import at.fhtw.mse.awt.twentyone.interfaces.GameSessionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,7 +43,7 @@ class GameSessionControllerTest {
         // Arrange
         Long sessionId = 1L;
         Long playerId = 10L;
-        GameSessionDto dto = new GameSessionDto(sessionId, playerId, "ACTIVE", LocalDateTime.of(2025, 1, 1, 10, 0), null);
+        GameSessionDto dto = new GameSessionDto(sessionId, playerId, GameSessionStatus.ACTIVE, LocalDateTime.of(2025, 1, 1, 10, 0), null);
 
         Mockito.when(gameSessionService.getGameSession(sessionId)).thenReturn(dto);
 
@@ -71,7 +72,7 @@ class GameSessionControllerTest {
     void testCreateGameSession_shouldReturnCreated() throws Exception {
         // Arrange
         GameSessionCreationRequestDto requestDto = new GameSessionCreationRequestDto(10L);
-        GameSessionDto responseDto = new GameSessionDto(1L, 10L, "ACTIVE", LocalDateTime.now(), null);
+        GameSessionDto responseDto = new GameSessionDto(1L, 10L, GameSessionStatus.ACTIVE, LocalDateTime.now(), null);
 
         Mockito.when(gameSessionService.createGameSession(any(GameSessionCreationRequestDto.class))).thenReturn(responseDto);
 
@@ -89,8 +90,8 @@ class GameSessionControllerTest {
     void testUpdateGameSession_shouldReturnOk() throws Exception {
         // Arrange
         Long sessionId = 1L;
-        GameSessionUpdateRequestDto requestDto = new GameSessionUpdateRequestDto("PLAYER_WINS");
-        GameSessionDto responseDto = new GameSessionDto(sessionId, 10L, "PLAYER_WINS", LocalDateTime.now(), LocalDateTime.now());
+        GameSessionUpdateRequestDto requestDto = new GameSessionUpdateRequestDto(GameSessionStatus.ENDED);
+        GameSessionDto responseDto = new GameSessionDto(sessionId, 10L, GameSessionStatus.ENDED, LocalDateTime.now(), LocalDateTime.now());
 
         Mockito.when(gameSessionService.updateGameSession(eq(sessionId), any(GameSessionUpdateRequestDto.class))).thenReturn(responseDto);
 

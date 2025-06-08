@@ -3,6 +3,7 @@ package at.fhtw.mse.awt.twentyone.services;
 import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
 import at.fhtw.mse.awt.twentyone.entities.GameResult;
 import at.fhtw.mse.awt.twentyone.entities.GameSession;
+import at.fhtw.mse.awt.twentyone.enums.Outcome;
 import at.fhtw.mse.awt.twentyone.repositories.GameResultRepository;
 import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -40,7 +41,7 @@ class GameResultServiceImplTest {
         GameResult result = new GameResult();
         result.setGameResultId(10L);
         result.setGameSession(session);
-        result.setOutcome(at.fhtw.mse.awt.twentyone.entities.Outcome.WIN);
+        result.setOutcome(Outcome.WIN);
         result.setPayout(BigDecimal.valueOf(50.0));
 
         when(gameSessionRepository.existsById(sessionId)).thenReturn(true);
