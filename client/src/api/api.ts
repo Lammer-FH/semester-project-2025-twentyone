@@ -90,7 +90,7 @@ export interface GameSessionDto {
      * @type {string}
      * @memberof GameSessionDto
      */
-    'status'?: string;
+    'status'?: GameSessionDtoStatusEnum;
     /**
      * 
      * @type {string}
@@ -104,6 +104,15 @@ export interface GameSessionDto {
      */
     'endTime'?: string;
 }
+
+export const GameSessionDtoStatusEnum = {
+    Active: 'ACTIVE',
+    Ended: 'ENDED',
+    Cancelled: 'CANCELLED'
+} as const;
+
+export type GameSessionDtoStatusEnum = typeof GameSessionDtoStatusEnum[keyof typeof GameSessionDtoStatusEnum];
+
 /**
  * 
  * @export
@@ -115,8 +124,17 @@ export interface GameSessionUpdateRequestDto {
      * @type {string}
      * @memberof GameSessionUpdateRequestDto
      */
-    'status'?: string;
+    'status'?: GameSessionUpdateRequestDtoStatusEnum;
 }
+
+export const GameSessionUpdateRequestDtoStatusEnum = {
+    Active: 'ACTIVE',
+    Ended: 'ENDED',
+    Cancelled: 'CANCELLED'
+} as const;
+
+export type GameSessionUpdateRequestDtoStatusEnum = typeof GameSessionUpdateRequestDtoStatusEnum[keyof typeof GameSessionUpdateRequestDtoStatusEnum];
+
 /**
  * 
  * @export
