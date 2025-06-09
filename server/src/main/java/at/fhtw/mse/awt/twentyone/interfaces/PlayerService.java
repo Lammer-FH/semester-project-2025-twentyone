@@ -17,6 +17,15 @@ public interface PlayerService {
     PlayerDto getPlayer(Long playerId);
 
     /**
+     * Login for player.
+     *
+     * @param username of the player
+     * @param password of the player
+     * @return DTO with player data
+     */
+    PlayerDto login(String username, String password);
+
+    /**
      * Creates a new player profile.
      *
      * @param playerRequestDto Request DTO with player data

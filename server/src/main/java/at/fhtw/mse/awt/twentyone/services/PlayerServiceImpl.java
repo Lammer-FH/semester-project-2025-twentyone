@@ -28,6 +28,17 @@ public class PlayerServiceImpl implements PlayerService {
         return mapToDto(player);
     }
 
+    @Transactional
+    @Override
+    public PlayerDto login(String username, String password) {
+        Player player = playerRepository.findByUserName(username)
+                .orElseThrow(() -> new EntityNotFoundException("Player not found with username: " + username));
+        if(player.getPassword() == password){
+            return mapToDto(player);
+        }
+        throw new EntityNotFoundException("Wrong password");
+    }
+
     @Override
     public PlayerDto createPlayer(PlayerRequestDto playerRequestDto) {
         Player playerToCreate = mapToEntity(playerRequestDto);

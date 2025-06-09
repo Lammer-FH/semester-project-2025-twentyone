@@ -1,5 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
+import at.fhtw.mse.awt.twentyone.dtos.Player.LoginRequestDto;
 import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerDto;
 import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerRequestDto;
 import at.fhtw.mse.awt.twentyone.interfaces.PlayerService;
@@ -33,6 +34,16 @@ public class PlayerController {
     public PlayerDto getPlayer(@PathVariable Long id) {
 
         return playerService.getPlayer(id);
+    }
+    
+    @Operation(summary = "Login player with username and password")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Login successful"),
+            @ApiResponse(responseCode = "401", description = "Invalid credentials")
+    })
+    @PostMapping("/login")
+    public PlayerDto login(@RequestBody LoginRequestDto loginRequestDto) {
+        return playerService.login(loginRequestDto.getUserName(), loginRequestDto.getPassword());
     }
 
     @Operation(summary = "Create new player")

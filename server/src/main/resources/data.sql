@@ -2,9 +2,9 @@ DELETE FROM players;
 DELETE FROM game_results;
 DELETE FROM game_sessions;
 
-INSERT INTO players (player_id, user_name, name, password_hash) VALUES
-                                                     (123, 'aUser', 'user', 123),
-                                                     (1234, 'anAwesomeUser', 'awesomeUser', 1234);
+INSERT INTO players (player_id, user_name, name, password) VALUES
+                                                     (123, 'aUser', 'user', '123'),
+                                                     (1234, 'anAwesomeUser', 'awesomeUser', '1234');
 
 INSERT INTO game_sessions (start_time, end_time) VALUES
                                                      ('2025-01-15T10:00:00', '2025-01-15T10:15:30'),  -- Session 1 (ended)

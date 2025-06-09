@@ -22,5 +22,5 @@ public class Player {
     private String name;
 
     @Column(nullable = false, length = 100)
-    private String passwordHash;
+    private String password;
 }

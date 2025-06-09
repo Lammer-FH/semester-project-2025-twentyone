@@ -20,7 +20,7 @@ class PlayerRepositoryTest {
         Player player = new Player();
         player.setUserName("jack21");
         player.setName("Jack Black");
-        player.setPasswordHash("secureHash123");
+        player.setPassword("secureHash123");
         player.setPlayerId(123L);
         playerRepository.save(player);
 
@@ -28,7 +28,7 @@ class PlayerRepositoryTest {
 
         assertThat(found).isPresent();
         assertThat(found.get().getName()).isEqualTo("Jack Black");
-        assertThat(found.get().getPasswordHash()).isEqualTo("secureHash123");
+        assertThat(found.get().getPassword()).isEqualTo("secureHash123");
     }
 
     @Test
