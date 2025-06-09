@@ -42,6 +42,7 @@ public class PlayerServiceImpl implements PlayerService {
         return mapToDto(player);
     }
 
+    @Transactional
     @Override
     public void deletePlayer(Long playerId) {
         playerRepository.removeByPlayerId(playerId)

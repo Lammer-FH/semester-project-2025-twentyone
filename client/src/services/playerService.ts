@@ -60,7 +60,12 @@ export const playerService = {
     },
 
     async deletePlayer(id: number): Promise<void> {
-        // ToDo
+        try {
+            await axios.delete(`${API_URL}/players/${id}`);
+        } catch (error) {
+            handleAxiosError(error);
+            throw error;
+        }
     },
 
     async login(credentials: LoginCredentials): Promise<void> {

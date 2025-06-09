@@ -41,7 +41,17 @@ const handleUpdate = async () => {
 };
 
 const handleDelete = async () => {
-    // ToDo
+    try {
+        if (!player.value || !player.value.id) return;
+        
+        await playerService.deletePlayer(player.value.id);
+        showDeleteConfirm.value = false;
+        logout();
+        router.push('/login');
+    } catch (err) {
+        error.value = 'Failed to delete account. Please try again.';
+        showDeleteConfirm.value = false;
+    }
 };
 
 const handleLogout = () => {
