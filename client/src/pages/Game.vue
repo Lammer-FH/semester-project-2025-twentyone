@@ -15,14 +15,19 @@
     <IonContent class="ion-padding">
       <DealerHand :cards="dealerCards" />
       <PlayerHand :cards="playerCards" />
-      <ScoreDisplay :score="playerScore" />
-      <ActionButtons @hit="onHit" @stand="onStand" />
+      <ScoreDisplay :player-score="playerScore" :dealer-score="dealerScore" />
+      
+      <div v-if="isGameOver" class="game-over">
+        <h2 class="status-message">{{ statusMessage }}</h2>
+        <IonButton expand="block" @click="startNewGame">New Game</IonButton>
+      </div>
+      <ActionButtons v-else @hit="hit" @stand="stand" />
     </IonContent>
   </IonPage>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { 
   IonContent, 
   IonHeader, 
@@ -32,6 +37,7 @@ import {
   IonButtons,
   IonBackButton,
   IonIcon,
+  IonButton
 } from '@ionic/vue'
 import { gameControllerOutline } from 'ionicons/icons'
 
@@ -39,48 +45,34 @@ import DealerHand from '@/components/game/DealerHand.vue'
 import PlayerHand from '@/components/game/PlayerHand.vue'
 import ScoreDisplay from '@/components/game/ScoreDisplay.vue'
 import ActionButtons from '@/components/game/ActionButtons.vue'
-import { useRoute } from 'vue-router'
-import type { GameSessionDto } from '@/api'
-import { fetchGameSession } from '@/services/game-session.service.ts'
+import { useBlackjack } from '@/composables/useBlackjack'
 
-interface ExtendedGameSessionDto extends GameSessionDto {
-  dealerCards: string[]
-  playerCards: string[]
-  playerScore: number
-}
+const {
+  playerCards,
+  dealerCards,
+  playerScore,
+  dealerScore,
+  isGameOver,
+  statusMessage,
+  startNewGame,
+  hit,
+  stand
+} = useBlackjack()
 
-const route = useRoute()
-const session = ref<ExtendedGameSessionDto | null>(null)
-const dealerCards = computed(() => session.value?.dealerCards ?? [])
-const playerCards = computed(() => session.value?.playerCards ?? [])
-const playerScore = computed(() => session.value?.playerScore ?? 0)
-
-// Daten aus BE fetchen
-onMounted(async () => {
-  const id = Number(route.params.id)
-  const gameSession = await fetchGameSession(id)
-  session.value = {
-    ...gameSession,
-    dealerCards: [],
-    playerCards: [],
-    playerScore: 0
-  }
+onMounted(() => {
+  startNewGame()
 })
-
-// aktuell mal noch mit mocks
-function onHit() {
-  if (session.value) {
-    session.value.playerCards.push('5H')
-    session.value.playerScore += 5
-  }
-}
-
-// hier auch n mock
-function onStand() {
-  if (session.value) {
-    session.value.dealerCards.push('6S')
-  }
-}
 </script>
 
-<style scoped></style>
+<style scoped>
+.game-over {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.status-message {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ion-color-primary);
+}
+</style>
