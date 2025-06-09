@@ -12,6 +12,10 @@ export type GameState = {
     dealerScore: number;
     isPlayerTurn: boolean;
     isDealerTurn: boolean;
+    bet: number;
+    canDouble: boolean;
+    canSplit: boolean;
+    splitHand?: GameState; // Optional split hand state
 };
 
-export type GameAction = 'hit' | 'stand'; 
+export type GameAction = 'hit' | 'stand' | 'double' | 'split'; 

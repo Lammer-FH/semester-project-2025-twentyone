@@ -21,7 +21,17 @@
         <h2 class="status-message">{{ statusMessage }}</h2>
         <IonButton expand="block" @click="startNewGame">New Game</IonButton>
       </div>
-      <ActionButtons v-else @hit="hit" @stand="stand" />
+      <ActionButtons 
+        v-else 
+        @hit="hit" 
+        @stand="stand"
+        @double="double"
+        @split="split"
+        :can-hit="true"
+        :can-stand="true"
+        :can-double="canDouble"
+        :can-split="canSplit"
+      />
     </IonContent>
   </IonPage>
 </template>
@@ -56,7 +66,11 @@ const {
   statusMessage,
   startNewGame,
   hit,
-  stand
+  stand,
+  double,
+  split,
+  canDouble,
+  canSplit
 } = useBlackjack()
 
 onMounted(() => {

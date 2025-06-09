@@ -73,7 +73,10 @@ export class BlackjackService {
             playerScore: 0,
             dealerScore: 0,
             isPlayerTurn: true,
-            isDealerTurn: false
+            isDealerTurn: false,
+            bet: 10, // Default bet
+            canDouble: true, // Initially can double
+            canSplit: false // Will be set after dealing cards
         };
 
         // Deal initial cards
@@ -92,7 +95,15 @@ export class BlackjackService {
             state.isPlayerTurn = false;
         }
 
+        // Check if split is possible
+        state.canSplit = this.canSplit(state.playerHand);
+
         return state;
+    }
+
+    private canSplit(hand: Card[]): boolean {
+        return hand.length === 2 && 
+               this.getCardValue(hand[0].code[0]) === this.getCardValue(hand[1].code[0]);
     }
 
     playerHit(state: GameState): GameState {
@@ -157,5 +168,70 @@ export class BlackjackService {
         } else {
             state.gameStatus = 'push';
         }
+    }
+
+    playerDouble(state: GameState): GameState {
+        if (!state.isPlayerTurn || !state.canDouble || state.gameStatus !== 'playing') {
+            return state;
+        }
+
+        // Double the bet
+        state.bet *= 2;
+        
+        // Draw one card
+        state.playerHand.push(this.dealCard(state));
+        state.playerScore = this.calculateScore(state.playerHand);
+
+        // Check for bust
+        if (state.playerScore > 21) {
+            state.gameStatus = 'playerBust';
+            state.isPlayerTurn = false;
+            return state;
+        }
+
+        // Automatically stand after doubling
+        return this.playerStand(state);
+    }
+
+    playerSplit(state: GameState): GameState {
+        if (!state.isPlayerTurn || !state.canSplit || state.gameStatus !== 'playing') {
+            return state;
+        }
+
+        // Create a new game state for the split hand
+        const splitState: GameState = {
+            ...state,
+            playerHand: [state.playerHand[1]], // Take second card
+            dealerHand: [], // New dealer hand for split game
+            playerScore: 0,
+            dealerScore: 0,
+            isPlayerTurn: true,
+            isDealerTurn: false,
+            gameStatus: 'playing'
+        };
+
+        // Update current hand
+        state.playerHand = [state.playerHand[0]]; // Keep first card
+        
+        // Deal new cards to both hands
+        state.playerHand.push(this.dealCard(state));
+        splitState.playerHand.push(this.dealCard(state));
+
+        // Update scores
+        state.playerScore = this.calculateScore(state.playerHand);
+        splitState.playerScore = this.calculateScore(splitState.playerHand);
+
+        // Update split possibilities
+        state.canSplit = this.canSplit(state.playerHand);
+        splitState.canSplit = this.canSplit(splitState.playerHand);
+
+        // Can't double after split
+        state.canDouble = false;
+        splitState.canDouble = false;
+
+        // Store split state for later
+        state.splitHand = splitState;
+
+        return state;
     }
 } 

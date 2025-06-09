@@ -16,6 +16,8 @@ export function useBlackjack() {
         const status = gameState.value?.gameStatus;
         return status !== 'playing';
     });
+    const canDouble = computed(() => gameState.value?.canDouble ?? false);
+    const canSplit = computed(() => gameState.value?.canSplit ?? false);
 
     const statusMessage = computed(() => {
         switch (gameState.value?.gameStatus) {
@@ -48,6 +50,16 @@ export function useBlackjack() {
         gameState.value = blackjackService.playerStand(gameState.value);
     }
 
+    function double() {
+        if (!gameState.value) return;
+        gameState.value = blackjackService.playerDouble(gameState.value);
+    }
+
+    function split() {
+        if (!gameState.value) return;
+        gameState.value = blackjackService.playerSplit(gameState.value);
+    }
+
     return {
         playerCards,
         dealerCards,
@@ -56,8 +68,12 @@ export function useBlackjack() {
         gameStatus,
         isGameOver,
         statusMessage,
+        canDouble,
+        canSplit,
         startNewGame,
         hit,
-        stand
+        stand,
+        double,
+        split
     };
 } 
