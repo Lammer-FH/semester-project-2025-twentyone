@@ -14,7 +14,28 @@ const error = ref('');
 const isLoading = ref(false);
 
 const handleLogin = async () => {
-    // ToDo
+    // ToDo!
+    // This is only a temporary solution to test the login functionality
+    // We need to implement the actual login functionality
+    
+    try {
+        error.value = '';
+        isLoading.value = true;
+        // Temporary solution: Just fetch player with ID 1
+        const player = await playerService.getPlayer(1);
+        setCurrentPlayer(player);
+        router.push('/');
+    } catch (err: any) {
+        if (err.message === 'Cannot connect to the server.') {
+            error.value = err.message;
+        } else if (err.response?.status === 404) {
+            error.value = 'Player not found.';
+        } else {
+            error.value = 'Login failed.';
+        }
+    } finally {
+        isLoading.value = false;
+    }
 };
 
 const handleRegister = async () => {
