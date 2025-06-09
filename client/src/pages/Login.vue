@@ -75,7 +75,9 @@ const handleRegister = async () => {
         <ion-content class="ion-padding">
             <ion-card>
                 <ion-card-header>
-                    <ion-card-title class="ion-text-center">Welcome to Twenty-One</ion-card-title>
+                    <ion-card-title class="ion-text-center">
+                        <img src="@/assets/TwentyOneLogo.png" alt="Twenty-One Logo" class="logo">
+                    </ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
                     <ion-segment v-model="selectedSegment">
@@ -126,5 +128,12 @@ const handleRegister = async () => {
 ion-spinner {
     width: 20px;
     height: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
 }
 </style> 
