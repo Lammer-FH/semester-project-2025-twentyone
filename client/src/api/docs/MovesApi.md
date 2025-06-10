@@ -23,11 +23,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new MovesApi(configuration);
 
-let sessionId: number; // (default to undefined)
 let moveDto: MoveDto; //
 
 const { status, data } = await apiInstance.createMove(
-    sessionId,
     moveDto
 );
 ```
@@ -37,7 +35,6 @@ const { status, data } = await apiInstance.createMove(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **moveDto** | **MoveDto**|  | |
-| **sessionId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type
@@ -76,18 +73,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new MovesApi(configuration);
 
-let sessionId: number; // (default to undefined)
-
-const { status, data } = await apiInstance.getMoves(
-    sessionId
-);
+const { status, data } = await apiInstance.getMoves();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **sessionId** | [**number**] |  | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type

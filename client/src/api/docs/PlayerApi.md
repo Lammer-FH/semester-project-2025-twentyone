@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost:8080/twentyone/api*
 |[**createPlayer**](#createplayer) | **POST** /players | Create new player|
 |[**deletePlayer**](#deleteplayer) | **DELETE** /players/{id} | Delete player by ID|
 |[**getPlayer**](#getplayer) | **GET** /players/{id} | Get player by ID|
+|[**login**](#login) | **POST** /players/login | Login player with username and password|
 |[**updatePlayer**](#updateplayer) | **PUT** /players/{id} | Update player by ID|
 
 # **createPlayer**
@@ -125,18 +126,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PlayerApi(configuration);
 
-let id: number; // (default to undefined)
-
-const { status, data } = await apiInstance.getPlayer(
-    id
-);
+const { status, data } = await apiInstance.getPlayer();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] |  | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
@@ -161,6 +155,58 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **login**
+> PlayerDto login(loginRequestDto)
+
+
+### Example
+
+```typescript
+import {
+    PlayerApi,
+    Configuration,
+    LoginRequestDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new PlayerApi(configuration);
+
+let loginRequestDto: LoginRequestDto; //
+
+const { status, data } = await apiInstance.login(
+    loginRequestDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **loginRequestDto** | **LoginRequestDto**|  | |
+
+
+### Return type
+
+**PlayerDto**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Login successful |  -  |
+|**401** | Invalid credentials |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **updatePlayer**
 > PlayerDto updatePlayer(playerRequestDto)
 
@@ -177,11 +223,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PlayerApi(configuration);
 
-let id: number; // (default to undefined)
 let playerRequestDto: PlayerRequestDto; //
 
 const { status, data } = await apiInstance.updatePlayer(
-    id,
     playerRequestDto
 );
 ```
@@ -191,7 +235,6 @@ const { status, data } = await apiInstance.updatePlayer(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **playerRequestDto** | **PlayerRequestDto**|  | |
-| **id** | [**number**] |  | defaults to undefined|
 
 
 ### Return type

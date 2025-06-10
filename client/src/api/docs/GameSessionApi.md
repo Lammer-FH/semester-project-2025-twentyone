@@ -76,18 +76,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GameSessionApi(configuration);
 
-let id: number; // (default to undefined)
-
-const { status, data } = await apiInstance.deleteGameSession(
-    id
-);
+const { status, data } = await apiInstance.deleteGameSession();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] |  | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
@@ -127,18 +120,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GameSessionApi(configuration);
 
-let id: number; // (default to undefined)
-
-const { status, data } = await apiInstance.getGameSession(
-    id
-);
+const { status, data } = await apiInstance.getGameSession();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] |  | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
@@ -179,11 +165,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GameSessionApi(configuration);
 
-let id: number; // (default to undefined)
 let gameSessionUpdateRequestDto: GameSessionUpdateRequestDto; //
 
 const { status, data } = await apiInstance.updateGameSession(
-    id,
     gameSessionUpdateRequestDto
 );
 ```
@@ -193,7 +177,6 @@ const { status, data } = await apiInstance.updateGameSession(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **gameSessionUpdateRequestDto** | **GameSessionUpdateRequestDto**|  | |
-| **id** | [**number**] |  | defaults to undefined|
 
 
 ### Return type

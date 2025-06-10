@@ -22,18 +22,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new MoveDetailsApi(configuration);
 
-let id: number; // (default to undefined)
-
-const { status, data } = await apiInstance.deleteMove(
-    id
-);
+const { status, data } = await apiInstance.deleteMove();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] |  | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
@@ -73,11 +66,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new MoveDetailsApi(configuration);
 
-let id: number; // (default to undefined)
 let moveDto: MoveDto; //
 
 const { status, data } = await apiInstance.updateMove(
-    id,
     moveDto
 );
 ```
@@ -87,7 +78,6 @@ const { status, data } = await apiInstance.updateMove(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **moveDto** | **MoveDto**|  | |
-| **id** | [**number**] |  | defaults to undefined|
 
 
 ### Return type

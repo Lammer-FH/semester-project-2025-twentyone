@@ -138,6 +138,25 @@ export type GameSessionUpdateRequestDtoStatusEnum = typeof GameSessionUpdateRequ
 /**
  * 
  * @export
+ * @interface LoginRequestDto
+ */
+export interface LoginRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginRequestDto
+     */
+    'userName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginRequestDto
+     */
+    'password'?: string;
+}
+/**
+ * 
+ * @export
  * @interface MoveDto
  */
 export interface MoveDto {
@@ -376,15 +395,11 @@ export const GameSessionApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @summary End a game session and clear its state
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteGameSession: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteGameSession', 'id', id)
-            const localVarPath = `/game-sessions/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        deleteGameSession: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/game-sessions/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -410,15 +425,11 @@ export const GameSessionApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @summary Get game session by ID (View Game Status)
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGameSession: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getGameSession', 'id', id)
-            const localVarPath = `/game-sessions/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        getGameSession: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/game-sessions/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -444,18 +455,14 @@ export const GameSessionApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @summary Modify game-session details (e.g., change activity state)
-         * @param {number} id 
          * @param {GameSessionUpdateRequestDto} gameSessionUpdateRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateGameSession: async (id: number, gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateGameSession', 'id', id)
+        updateGameSession: async (gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gameSessionUpdateRequestDto' is not null or undefined
             assertParamExists('updateGameSession', 'gameSessionUpdateRequestDto', gameSessionUpdateRequestDto)
-            const localVarPath = `/game-sessions/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarPath = `/game-sessions/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -507,12 +514,11 @@ export const GameSessionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary End a game session and clear its state
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteGameSession(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGameSession(id, options);
+        async deleteGameSession(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGameSession(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GameSessionApi.deleteGameSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -520,12 +526,11 @@ export const GameSessionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get game session by ID (View Game Status)
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameSession(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameSessionDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGameSession(id, options);
+        async getGameSession(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameSessionDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGameSession(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GameSessionApi.getGameSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -533,13 +538,12 @@ export const GameSessionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Modify game-session details (e.g., change activity state)
-         * @param {number} id 
          * @param {GameSessionUpdateRequestDto} gameSessionUpdateRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateGameSession(id: number, gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameSessionDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateGameSession(id, gameSessionUpdateRequestDto, options);
+        async updateGameSession(gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameSessionDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateGameSession(gameSessionUpdateRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GameSessionApi.updateGameSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -567,33 +571,30 @@ export const GameSessionApiFactory = function (configuration?: Configuration, ba
         /**
          * 
          * @summary End a game session and clear its state
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteGameSession(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteGameSession(id, options).then((request) => request(axios, basePath));
+        deleteGameSession(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteGameSession(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Get game session by ID (View Game Status)
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGameSession(id: number, options?: RawAxiosRequestConfig): AxiosPromise<GameSessionDto> {
-            return localVarFp.getGameSession(id, options).then((request) => request(axios, basePath));
+        getGameSession(options?: RawAxiosRequestConfig): AxiosPromise<GameSessionDto> {
+            return localVarFp.getGameSession(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Modify game-session details (e.g., change activity state)
-         * @param {number} id 
          * @param {GameSessionUpdateRequestDto} gameSessionUpdateRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateGameSession(id: number, gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<GameSessionDto> {
-            return localVarFp.updateGameSession(id, gameSessionUpdateRequestDto, options).then((request) => request(axios, basePath));
+        updateGameSession(gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<GameSessionDto> {
+            return localVarFp.updateGameSession(gameSessionUpdateRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -620,38 +621,35 @@ export class GameSessionApi extends BaseAPI {
     /**
      * 
      * @summary End a game session and clear its state
-     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GameSessionApi
      */
-    public deleteGameSession(id: number, options?: RawAxiosRequestConfig) {
-        return GameSessionApiFp(this.configuration).deleteGameSession(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteGameSession(options?: RawAxiosRequestConfig) {
+        return GameSessionApiFp(this.configuration).deleteGameSession(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get game session by ID (View Game Status)
-     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GameSessionApi
      */
-    public getGameSession(id: number, options?: RawAxiosRequestConfig) {
-        return GameSessionApiFp(this.configuration).getGameSession(id, options).then((request) => request(this.axios, this.basePath));
+    public getGameSession(options?: RawAxiosRequestConfig) {
+        return GameSessionApiFp(this.configuration).getGameSession(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Modify game-session details (e.g., change activity state)
-     * @param {number} id 
      * @param {GameSessionUpdateRequestDto} gameSessionUpdateRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GameSessionApi
      */
-    public updateGameSession(id: number, gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig) {
-        return GameSessionApiFp(this.configuration).updateGameSession(id, gameSessionUpdateRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateGameSession(gameSessionUpdateRequestDto: GameSessionUpdateRequestDto, options?: RawAxiosRequestConfig) {
+        return GameSessionApiFp(this.configuration).updateGameSession(gameSessionUpdateRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -666,15 +664,11 @@ export const MoveDetailsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @summary Delete a move
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteMove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteMove', 'id', id)
-            const localVarPath = `/moves/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        deleteMove: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/moves/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -700,18 +694,14 @@ export const MoveDetailsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @summary Update a move
-         * @param {number} id 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMove: async (id: number, moveDto: MoveDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateMove', 'id', id)
+        updateMove: async (moveDto: MoveDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'moveDto' is not null or undefined
             assertParamExists('updateMove', 'moveDto', moveDto)
-            const localVarPath = `/moves/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarPath = `/moves/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -750,12 +740,11 @@ export const MoveDetailsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a move
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteMove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMove(id, options);
+        async deleteMove(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMove(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MoveDetailsApi.deleteMove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -763,13 +752,12 @@ export const MoveDetailsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a move
-         * @param {number} id 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMove(id: number, moveDto: MoveDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MoveDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMove(id, moveDto, options);
+        async updateMove(moveDto: MoveDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MoveDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMove(moveDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MoveDetailsApi.updateMove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -787,23 +775,21 @@ export const MoveDetailsApiFactory = function (configuration?: Configuration, ba
         /**
          * 
          * @summary Delete a move
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteMove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteMove(id, options).then((request) => request(axios, basePath));
+        deleteMove(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteMove(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update a move
-         * @param {number} id 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMove(id: number, moveDto: MoveDto, options?: RawAxiosRequestConfig): AxiosPromise<MoveDto> {
-            return localVarFp.updateMove(id, moveDto, options).then((request) => request(axios, basePath));
+        updateMove(moveDto: MoveDto, options?: RawAxiosRequestConfig): AxiosPromise<MoveDto> {
+            return localVarFp.updateMove(moveDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -818,26 +804,24 @@ export class MoveDetailsApi extends BaseAPI {
     /**
      * 
      * @summary Delete a move
-     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MoveDetailsApi
      */
-    public deleteMove(id: number, options?: RawAxiosRequestConfig) {
-        return MoveDetailsApiFp(this.configuration).deleteMove(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteMove(options?: RawAxiosRequestConfig) {
+        return MoveDetailsApiFp(this.configuration).deleteMove(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Update a move
-     * @param {number} id 
      * @param {MoveDto} moveDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MoveDetailsApi
      */
-    public updateMove(id: number, moveDto: MoveDto, options?: RawAxiosRequestConfig) {
-        return MoveDetailsApiFp(this.configuration).updateMove(id, moveDto, options).then((request) => request(this.axios, this.basePath));
+    public updateMove(moveDto: MoveDto, options?: RawAxiosRequestConfig) {
+        return MoveDetailsApiFp(this.configuration).updateMove(moveDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -852,18 +836,14 @@ export const MovesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Create a new move
-         * @param {number} sessionId 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMove: async (sessionId: number, moveDto: MoveDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'sessionId' is not null or undefined
-            assertParamExists('createMove', 'sessionId', sessionId)
+        createMove: async (moveDto: MoveDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'moveDto' is not null or undefined
             assertParamExists('createMove', 'moveDto', moveDto)
-            const localVarPath = `/game-sessions/{sessionId}/moves`
-                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            const localVarPath = `/game-sessions/{sessionId}/moves`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -892,15 +872,11 @@ export const MovesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @summary Get all moves for a session
-         * @param {number} sessionId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMoves: async (sessionId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'sessionId' is not null or undefined
-            assertParamExists('getMoves', 'sessionId', sessionId)
-            const localVarPath = `/game-sessions/{sessionId}/moves`
-                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+        getMoves: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/game-sessions/{sessionId}/moves`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -936,13 +912,12 @@ export const MovesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new move
-         * @param {number} sessionId 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createMove(sessionId: number, moveDto: MoveDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MoveDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createMove(sessionId, moveDto, options);
+        async createMove(moveDto: MoveDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MoveDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createMove(moveDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MovesApi.createMove']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -950,12 +925,11 @@ export const MovesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get all moves for a session
-         * @param {number} sessionId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMoves(sessionId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MoveDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMoves(sessionId, options);
+        async getMoves(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MoveDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMoves(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MovesApi.getMoves']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -973,23 +947,21 @@ export const MovesApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @summary Create a new move
-         * @param {number} sessionId 
          * @param {MoveDto} moveDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMove(sessionId: number, moveDto: MoveDto, options?: RawAxiosRequestConfig): AxiosPromise<MoveDto> {
-            return localVarFp.createMove(sessionId, moveDto, options).then((request) => request(axios, basePath));
+        createMove(moveDto: MoveDto, options?: RawAxiosRequestConfig): AxiosPromise<MoveDto> {
+            return localVarFp.createMove(moveDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Get all moves for a session
-         * @param {number} sessionId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMoves(sessionId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<MoveDto>> {
-            return localVarFp.getMoves(sessionId, options).then((request) => request(axios, basePath));
+        getMoves(options?: RawAxiosRequestConfig): AxiosPromise<Array<MoveDto>> {
+            return localVarFp.getMoves(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1004,26 +976,24 @@ export class MovesApi extends BaseAPI {
     /**
      * 
      * @summary Create a new move
-     * @param {number} sessionId 
      * @param {MoveDto} moveDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MovesApi
      */
-    public createMove(sessionId: number, moveDto: MoveDto, options?: RawAxiosRequestConfig) {
-        return MovesApiFp(this.configuration).createMove(sessionId, moveDto, options).then((request) => request(this.axios, this.basePath));
+    public createMove(moveDto: MoveDto, options?: RawAxiosRequestConfig) {
+        return MovesApiFp(this.configuration).createMove(moveDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get all moves for a session
-     * @param {number} sessionId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MovesApi
      */
-    public getMoves(sessionId: number, options?: RawAxiosRequestConfig) {
-        return MovesApiFp(this.configuration).getMoves(sessionId, options).then((request) => request(this.axios, this.basePath));
+    public getMoves(options?: RawAxiosRequestConfig) {
+        return MovesApiFp(this.configuration).getMoves(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1108,15 +1078,11 @@ export const PlayerApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Get player by ID
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlayer: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getPlayer', 'id', id)
-            const localVarPath = `/players/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        getPlayer: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/players/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1141,19 +1107,51 @@ export const PlayerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @summary Login player with username and password
+         * @param {LoginRequestDto} loginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        login: async (loginRequestDto: LoginRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginRequestDto' is not null or undefined
+            assertParamExists('login', 'loginRequestDto', loginRequestDto)
+            const localVarPath = `/players/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Update player by ID
-         * @param {number} id 
          * @param {PlayerRequestDto} playerRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePlayer: async (id: number, playerRequestDto: PlayerRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updatePlayer', 'id', id)
+        updatePlayer: async (playerRequestDto: PlayerRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'playerRequestDto' is not null or undefined
             assertParamExists('updatePlayer', 'playerRequestDto', playerRequestDto)
-            const localVarPath = `/players/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarPath = `/players/{id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1218,26 +1216,37 @@ export const PlayerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get player by ID
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPlayer(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPlayer(id, options);
+        async getPlayer(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPlayer(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PlayerApi.getPlayer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
+         * @summary Login player with username and password
+         * @param {LoginRequestDto} loginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async login(loginRequestDto: LoginRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.login(loginRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PlayerApi.login']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Update player by ID
-         * @param {number} id 
          * @param {PlayerRequestDto} playerRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePlayer(id: number, playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePlayer(id, playerRequestDto, options);
+        async updatePlayer(playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePlayer(playerRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PlayerApi.updatePlayer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1275,23 +1284,31 @@ export const PlayerApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @summary Get player by ID
-         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlayer(id: number, options?: RawAxiosRequestConfig): AxiosPromise<PlayerDto> {
-            return localVarFp.getPlayer(id, options).then((request) => request(axios, basePath));
+        getPlayer(options?: RawAxiosRequestConfig): AxiosPromise<PlayerDto> {
+            return localVarFp.getPlayer(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Login player with username and password
+         * @param {LoginRequestDto} loginRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        login(loginRequestDto: LoginRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PlayerDto> {
+            return localVarFp.login(loginRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update player by ID
-         * @param {number} id 
          * @param {PlayerRequestDto} playerRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePlayer(id: number, playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PlayerDto> {
-            return localVarFp.updatePlayer(id, playerRequestDto, options).then((request) => request(axios, basePath));
+        updatePlayer(playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<PlayerDto> {
+            return localVarFp.updatePlayer(playerRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1330,26 +1347,36 @@ export class PlayerApi extends BaseAPI {
     /**
      * 
      * @summary Get player by ID
-     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayerApi
      */
-    public getPlayer(id: number, options?: RawAxiosRequestConfig) {
-        return PlayerApiFp(this.configuration).getPlayer(id, options).then((request) => request(this.axios, this.basePath));
+    public getPlayer(options?: RawAxiosRequestConfig) {
+        return PlayerApiFp(this.configuration).getPlayer(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Login player with username and password
+     * @param {LoginRequestDto} loginRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlayerApi
+     */
+    public login(loginRequestDto: LoginRequestDto, options?: RawAxiosRequestConfig) {
+        return PlayerApiFp(this.configuration).login(loginRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Update player by ID
-     * @param {number} id 
      * @param {PlayerRequestDto} playerRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayerApi
      */
-    public updatePlayer(id: number, playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig) {
-        return PlayerApiFp(this.configuration).updatePlayer(id, playerRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updatePlayer(playerRequestDto: PlayerRequestDto, options?: RawAxiosRequestConfig) {
+        return PlayerApiFp(this.configuration).updatePlayer(playerRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
