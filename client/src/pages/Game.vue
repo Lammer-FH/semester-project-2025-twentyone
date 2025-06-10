@@ -21,8 +21,14 @@
 
       <div v-if="isGameOver" class="game-over">
         <h2 class="status-message">{{ statusMessage }}</h2>
-        <IonButton expand="block" @click="startNewGame">New Game</IonButton>
+        <div class="button-alignment">
+          <IonButton expand="block" @click="startNewGame">Play Again</IonButton>
+          <IonButton expand="block" color="medium" @click="router.push('/game-results')"
+            >Game Results</IonButton
+          >
+        </div>
       </div>
+
       <ActionButtons
         v-else
         @hit="hit"
@@ -41,15 +47,15 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButtons,
-  IonBackButton,
-  IonIcon,
-  IonButton
 } from '@ionic/vue'
 import { gameControllerOutline } from 'ionicons/icons'
 
@@ -58,6 +64,7 @@ import PlayerHand from '@/components/game/PlayerHand.vue'
 import ScoreDisplay from '@/components/game/ScoreDisplay.vue'
 import ActionButtons from '@/components/game/ActionButtons.vue'
 import { useBlackjack } from '@/composables/useBlackjack'
+import router from '@/router'
 
 const {
   playerCards,
@@ -72,19 +79,22 @@ const {
   double,
   split,
   canDouble,
-  canSplit
+  canSplit,
 } = useBlackjack()
 
 onMounted(() => {
   startNewGame()
 })
-
 </script>
 
 <style scoped>
 .game-over {
   margin-top: 2rem;
   text-align: center;
+}
+.button-alignment {
+  display: flex;
+  justify-content: center;
 }
 
 .status-message {
