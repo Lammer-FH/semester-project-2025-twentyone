@@ -1,16 +1,17 @@
-package at.fhtw.mse.awt.twentyone.dtos.Card;
+package at.fhtw.mse.awt.twentyone.dtos.move;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardDto {
+public class MoveDto {
     private Long id;
     private Long gameSessionId;
-    private String rank;
-    private String suit;
-    private int position;
+    private String moveType;
+    private LocalDateTime occuredAt;
 }

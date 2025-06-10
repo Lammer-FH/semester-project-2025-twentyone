@@ -1,7 +1,7 @@
 <template>
   <IonCard>
     <IonCardHeader>
-      <IonCardTitle>Spieler</IonCardTitle>
+      <IonCardTitle>Player</IonCardTitle>
     </IonCardHeader>
     <IonCardContent>
       <IonRow>

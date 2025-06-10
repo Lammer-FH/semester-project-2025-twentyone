@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.services;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameResult.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
 import at.fhtw.mse.awt.twentyone.entities.GameResult;
 import at.fhtw.mse.awt.twentyone.interfaces.GameResultService;
 import at.fhtw.mse.awt.twentyone.repositories.GameResultRepository;
@@ -27,7 +27,7 @@ public class GameResultServiceImpl implements GameResultService {
         if (!gameSessionRepository.existsById(sessionId)) {
             throw new EntityNotFoundException("GameSession not found with id: " + sessionId);
         }
-        GameResult gameResult = gameResultRepository.findByGameSession_GameSessionId(sessionId)
+        GameResult gameResult = gameResultRepository.findByGameSession_Id(sessionId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "GameResult not found for GameSession id: " + sessionId
                 ));
@@ -40,7 +40,7 @@ public class GameResultServiceImpl implements GameResultService {
         }
         return new GameResultDto(
                 gameResult.getGameResultId(),
-                gameResult.getGameSession().getGameSessionId(),
+                gameResult.getGameSession().getId(),
                 gameResult.getOutcome().name(),
                 gameResult.getPayout()
         );

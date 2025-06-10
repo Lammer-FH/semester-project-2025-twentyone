@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **number** |  | [optional] [default to undefined]
+**playerId** | **number** |  | [optional] [default to undefined]
+**status** | **string** |  | [optional] [default to undefined]
 **startTime** | **string** |  | [optional] [default to undefined]
 **endTime** | **string** |  | [optional] [default to undefined]
 
@@ -16,6 +18,8 @@ import { GameSessionDto } from './api';
 
 const instance: GameSessionDto = {
     id,
+    playerId,
+    status,
     startTime,
     endTime,
 };

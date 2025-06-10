@@ -1,7 +1,7 @@
 package at.fhtw.mse.awt.twentyone.interfaces;
 
-import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerDto;
-import at.fhtw.mse.awt.twentyone.dtos.Player.PlayerRequestDto;
+import at.fhtw.mse.awt.twentyone.dtos.player.PlayerDto;
+import at.fhtw.mse.awt.twentyone.dtos.player.PlayerRequestDto;
 
 /**
  * Service interface for retrieving player profile.

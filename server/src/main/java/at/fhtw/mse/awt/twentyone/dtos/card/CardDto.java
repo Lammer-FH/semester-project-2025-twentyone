@@ -1,17 +1,16 @@
-package at.fhtw.mse.awt.twentyone.dtos.GameResult;
+package at.fhtw.mse.awt.twentyone.dtos.card;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameResultDto {
+public class CardDto {
     private Long id;
     private Long gameSessionId;
-    private String outcome;
-    private BigDecimal payout;
+    private String rank;
+    private String suit;
+    private int position;
 }
