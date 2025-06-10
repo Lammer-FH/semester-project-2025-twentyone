@@ -1,4 +1,4 @@
-package at.fhtw.mse.awt.twentyone.dtos;
+package at.fhtw.mse.awt.twentyone.dtos.card;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

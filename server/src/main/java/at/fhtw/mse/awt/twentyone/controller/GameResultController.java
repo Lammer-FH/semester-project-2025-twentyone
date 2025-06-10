@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
 import at.fhtw.mse.awt.twentyone.interfaces.GameResultService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

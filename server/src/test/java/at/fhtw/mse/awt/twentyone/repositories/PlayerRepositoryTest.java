@@ -16,14 +16,15 @@ class PlayerRepositoryTest {
     private PlayerRepository playerRepository;
 
     @Test
-    void shouldFindPlayerByUserName() {
+    void shouldFindPlayerByPlayerId() {
         Player player = new Player();
         player.setUserName("jack21");
         player.setName("Jack Black");
         player.setPasswordHash("secureHash123");
+        player.setPlayerId(123L);
         playerRepository.save(player);
 
-        Optional<Player> found = playerRepository.findByUserName("jack21");
+        Optional<Player> found = playerRepository.findByPlayerId(123L);
 
         assertThat(found).isPresent();
         assertThat(found.get().getName()).isEqualTo("Jack Black");
@@ -31,8 +32,8 @@ class PlayerRepositoryTest {
     }
 
     @Test
-    void shouldReturnEmptyWhenUserNameNotFound() {
-        Optional<Player> result = playerRepository.findByUserName("nonexistent");
+    void shouldReturnEmptyWhenPlayerIdNotFound() {
+        Optional<Player> result = playerRepository.findByPlayerId(123456L);
         assertThat(result).isEmpty();
     }
 }

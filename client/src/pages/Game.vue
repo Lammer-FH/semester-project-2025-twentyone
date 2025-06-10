@@ -2,9 +2,11 @@
   <IonPage>
     <IonHeader>
       <IonToolbar>
-        <IonButtons slot="start">
-          <IonBackButton default-href="/"></IonBackButton>
-        </IonButtons>
+        <template v-slot:start>
+          <IonButtons>
+            <IonBackButton default-href="/"></IonBackButton>
+          </IonButtons>
+        </template>
         <IonTitle>
           <IonIcon :icon="gameControllerOutline" class="ion-margin-end"></IonIcon>
           Play Game
@@ -16,17 +18,19 @@
       <DealerHand :cards="dealerCards" />
       <PlayerHand :cards="playerCards" />
       <ScoreDisplay :player-score="playerScore" :dealer-score="dealerScore" />
-      
+
       <div v-if="isGameOver" class="game-over">
         <h2 class="status-message">{{ statusMessage }}</h2>
         <IonButton expand="block" @click="startNewGame">New Game</IonButton>
       </div>
-      <ActionButtons 
-        v-else 
-        @hit="hit" 
+      <ActionButtons
+        v-else
+        @hit="hit"
         @stand="stand"
         @double="double"
         @split="split"
+        @retry="onRetry"
+        @result="goToResult"
         :can-hit="true"
         :can-stand="true"
         :can-double="canDouble"
@@ -38,11 +42,11 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
   IonToolbar,
   IonButtons,
   IonBackButton,
@@ -76,6 +80,30 @@ const {
 onMounted(() => {
   startNewGame()
 })
+
+// aktuell mal noch mit mocks
+function onHit() {
+  if (session.value) {
+    session.value.playerCards.push('5H')
+    session.value.playerScore += 5
+  }
+}
+
+// hier auch n mock
+function onStand() {
+  if (session.value) {
+    session.value.dealerCards.push('6S')
+  }
+}
+
+function onRetry() {
+  router.push({ name: '/' })
+}
+
+function goToResult() {
+  const id = Number(route.params.id)
+  router.push({ name: 'game-result', params: { sessionId: id } })
+}
 </script>
 
 <style scoped>

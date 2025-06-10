@@ -1,6 +1,6 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
-import at.fhtw.mse.awt.twentyone.dtos.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
 import at.fhtw.mse.awt.twentyone.interfaces.GameResultService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,7 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(GameResultController.class)
 class GameResultControllerTest {

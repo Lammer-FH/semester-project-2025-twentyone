@@ -69,11 +69,18 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/vue'
+import { createGameSession } from '@/services/game-session.service.ts'
 
 const router = useRouter()
 
-function startGame() {
-  router.push({ name: 'game', params: { id: 1 } })
+// ML TODO: mit richtiger PlayerId aus dem Playerstore spaeter ersetzen
+const playerId = 123
+
+async function startGame() {
+  const session = await createGameSession({ playerId })
+  if (session) {
+    await router.push({ name: 'game', params: { id: session.id } })
+  }
 }
 function viewResults() {
   router.push({ name: 'game-result', params: { sessionId: 1 } })
