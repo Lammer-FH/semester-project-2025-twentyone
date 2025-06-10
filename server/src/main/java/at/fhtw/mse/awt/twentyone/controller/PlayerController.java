@@ -66,7 +66,8 @@ public class PlayerController {
     @Operation(summary = "Delete player by ID")
     @ApiResponse(responseCode = "204", description = "Player deleted")
     @DeleteMapping("/{id}")
-    public void deletePlayer(@PathVariable Long id) {
+    public void deletePlayer(@PathVariable("id") Long id) {
         playerService.deletePlayer(id);
     }
+
 }

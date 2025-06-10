@@ -4,6 +4,8 @@ import at.fhtw.mse.awt.twentyone.dtos.player.PlayerDto;
 import at.fhtw.mse.awt.twentyone.dtos.player.PlayerRequestDto;
 import at.fhtw.mse.awt.twentyone.entities.Player;
 import at.fhtw.mse.awt.twentyone.interfaces.PlayerService;
+import at.fhtw.mse.awt.twentyone.repositories.GameResultRepository;
+import at.fhtw.mse.awt.twentyone.repositories.GameSessionRepository;
 import at.fhtw.mse.awt.twentyone.repositories.PlayerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;
@@ -17,10 +19,14 @@ import java.util.Objects;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final GameSessionRepository gameSessionRepository;
+    private final GameResultRepository gameResultRepository;
 
     // Constructor injection for the repository
-    public PlayerServiceImpl(PlayerRepository playerRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, GameSessionRepository gameSessionRepository, GameResultRepository gameResultRepository) {
         this.playerRepository = playerRepository;
+        this.gameSessionRepository = gameSessionRepository;
+        this.gameResultRepository = gameResultRepository;
     }
 
     @Transactional(readOnly = true)
@@ -59,6 +65,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Transactional
     @Override
     public void deletePlayer(@NotNull Long playerId) {
+
+        // Abheandigkeiten aufloesen auf die alte Truckerweise
+        gameResultRepository.deleteByGameSession_Player_PlayerId(playerId);
+        gameSessionRepository.deleteByPlayer_PlayerId(playerId);
+
         playerRepository.removeByPlayerId(playerId)
                 .orElseThrow(() -> new EntityNotFoundException("Player not found with id: " + playerId));
     }

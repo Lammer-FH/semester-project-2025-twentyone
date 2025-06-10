@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameSessionRepository extends JpaRepository<GameSession, Long> {
+
+    void deleteByPlayer_PlayerId(Long playerId);
+
 }
