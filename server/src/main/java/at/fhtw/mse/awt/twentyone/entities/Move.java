@@ -17,8 +17,8 @@ public class Move {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long moveId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "game_session_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_session_id", referencedColumnName = "id", nullable = false)
     private GameSession gameSession;
 
     @Column(nullable = false)

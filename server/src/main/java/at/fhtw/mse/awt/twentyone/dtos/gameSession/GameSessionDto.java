@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// @Builder // <-- REMOVED
+
 public class GameSessionDto {
     private Long id;
     private Long playerId;

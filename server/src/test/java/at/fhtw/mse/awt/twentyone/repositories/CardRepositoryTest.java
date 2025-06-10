@@ -29,19 +29,19 @@ class CardRepositoryTest {
 
     @Test
     void shouldReturnCardsByGameSessionId() {
-        // --- FIX: Step 1 - Create and save a Player first ---
+
         Player player = new Player(null, "testplayer", "Test Player", "hash");
         player = playerRepository.save(player);
 
-        // --- Original Code, with fixes applied ---
+
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
 
-        // --- FIX: Step 2 - Set the required fields on the session ---
+
         session.setPlayer(player);
         session.setStatus(GameSessionStatus.ACTIVE);
 
-        // Now this save will succeed
+
         session = gameSessionRepository.save(session);
 
         Card card = new Card();
