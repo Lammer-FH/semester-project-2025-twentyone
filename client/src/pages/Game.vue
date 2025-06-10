@@ -30,7 +30,6 @@
         @double="double"
         @split="split"
         @retry="onRetry"
-        @result="goToResult"
         :can-hit="true"
         :can-stand="true"
         :can-double="canDouble"
@@ -81,29 +80,6 @@ onMounted(() => {
   startNewGame()
 })
 
-// aktuell mal noch mit mocks
-function onHit() {
-  if (session.value) {
-    session.value.playerCards.push('5H')
-    session.value.playerScore += 5
-  }
-}
-
-// hier auch n mock
-function onStand() {
-  if (session.value) {
-    session.value.dealerCards.push('6S')
-  }
-}
-
-function onRetry() {
-  router.push({ name: '/' })
-}
-
-function goToResult() {
-  const id = Number(route.params.id)
-  router.push({ name: 'game-result', params: { sessionId: id } })
-}
 </script>
 
 <style scoped>

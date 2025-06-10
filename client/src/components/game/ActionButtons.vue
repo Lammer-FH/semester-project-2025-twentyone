@@ -26,24 +26,6 @@
         >Split</IonButton>
       </IonCol>
     </IonRow>
-    <IonRow class="ion-padding-top">
-      <IonCol>
-        <IonButton expand="block" color="medium" @click="$emit('retry')">
-          <template v-slot:start>
-            <IonIcon name="refresh-outline" />
-          </template>
-          Play Again
-        </IonButton>
-      </IonCol>
-      <IonCol>
-        <IonButton expand="block" color="tertiary" @click="$emit('result')">
-          <template v-slot:start>
-            <IonIcon name="trophy-outline" />
-          </template>
-          Game Result
-        </IonButton>
-      </IonCol>
-    </IonRow>
   </IonGrid>
 </template>
 
@@ -62,7 +44,5 @@ defineEmits<{
   (e: 'stand'): void;
   (e: 'double'): void;
   (e: 'split'): void;
-  (e: 'retry'): void
-  (e: 'result'): void
 }>();
 </script>
