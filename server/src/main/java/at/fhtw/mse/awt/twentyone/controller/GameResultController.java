@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-// import java.util.List; // No longer returning a list
-
 @RestController
 @RequestMapping("/game-results")
 @Tag(name = "Game Results", description = "Result for a completed game session")
