@@ -68,7 +68,14 @@ export const playerService = {
         }
     },
 
-    async login(credentials: LoginCredentials): Promise<void> {
-        // ToDo
+  async login(credentials: LoginCredentials): Promise<Player> {
+    try {
+      const response = await axios.post(`${API_URL}/players/login`, credentials);
+      return response.data;
+    } catch (error) {
+      handleAxiosError(error);
+      throw error;
     }
-}; 
+  }
+
+};
