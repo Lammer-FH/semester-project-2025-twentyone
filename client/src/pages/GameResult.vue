@@ -2,9 +2,11 @@
   <IonPage>
     <IonHeader>
       <IonToolbar>
-        <IonButtons slot="start">
-          <IonBackButton default-href="/"></IonBackButton>
-        </IonButtons>
+        <template v-slot:start>
+          <IonButtons>
+            <IonBackButton default-href="/"></IonBackButton>
+          </IonButtons>
+        </template>
         <IonTitle>
           <IonIcon :icon="trophyOutline" class="ion-margin-end"></IonIcon>
           Game Results
@@ -31,29 +33,27 @@
           <p>Unable to load game results</p>
           <IonButton router-link="/" class="ion-margin-top">Return to Home</IonButton>
         </div>
-        <div v-else class="no-result">
-          Loading game result...
-        </div>
+        <div v-else class="no-result">Loading game result...</div>
       </div>
     </IonContent>
   </IonPage>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
   IonBackButton,
-  IonButtons,
-  IonIcon,
   IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/vue'
-import { trophyOutline, alertCircleOutline } from 'ionicons/icons'
+import { alertCircleOutline, trophyOutline } from 'ionicons/icons'
 import axios from 'axios'
 import { BASE_PATH } from '@/api/base'
 import { showToast } from '@/composables/useToast'
@@ -72,7 +72,9 @@ const hasError = ref(false)
 onMounted(async () => {
   try {
     const sessionId = route.params.sessionId
-    const response = await axios.get<GameResult>(`${BASE_PATH}/game-sessions/${sessionId}/game-results`)
+    const response = await axios.get<GameResult>(
+      `${BASE_PATH}/game-sessions/${sessionId}/game-results`,
+    )
     gameResult.value = response.data
     hasError.value = false
   } catch (error: any) {
@@ -99,7 +101,7 @@ onMounted(async () => {
   padding: 20px;
   background: var(--ion-background-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -170,4 +172,4 @@ h2 {
   font-size: 1.2rem;
   margin: 1rem 0;
 }
-</style> 
+</style>

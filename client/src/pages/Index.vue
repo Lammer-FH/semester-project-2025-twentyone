@@ -84,7 +84,7 @@ async function startGame() {
   }
 }
 function viewResults() {
-  router.push({ name: 'game-result', params: { sessionId: 1 } })
+  router.push({ name: 'game-results'});
 }
 function goProfile() {
   router.push({ name: 'profile' })

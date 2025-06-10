@@ -7,6 +7,7 @@ import Rules from '@/pages/Rules.vue'
 import GameResult from '@/pages/GameResult.vue'
 import Login from '@/pages/Login.vue'
 import Profile from '@/pages/Profile.vue'
+import GameResults from "@/pages/GameResults.vue";
 
 const routes = [
   {
@@ -42,6 +43,12 @@ const routes = [
     name: 'game-result',
     component: GameResult,
     props: true,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/game-results',
+    name: 'game-results',
+    component: GameResults,
     meta: { requiresAuth: true },
   },
   {

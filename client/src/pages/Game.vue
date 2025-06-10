@@ -29,7 +29,6 @@
         @stand="stand"
         @double="double"
         @split="split"
-        @retry="onRetry"
         :can-hit="true"
         :can-stand="true"
         :can-double="canDouble"
