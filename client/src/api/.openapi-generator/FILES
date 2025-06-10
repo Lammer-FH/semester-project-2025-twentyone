@@ -5,6 +5,7 @@ base.ts
 common.ts
 configuration.ts
 docs/GameResultDto.md
+docs/GameResultOverviewDto.md
 docs/GameResultsApi.md
 docs/GameSessionApi.md
 docs/GameSessionCreationRequestDto.md

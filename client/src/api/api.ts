@@ -57,6 +57,40 @@ export interface GameResultDto {
 /**
  * 
  * @export
+ * @interface GameResultOverviewDto
+ */
+export interface GameResultOverviewDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof GameResultOverviewDto
+     */
+    'gameSessionId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GameResultOverviewDto
+     */
+    'outcome'?: GameResultOverviewDtoOutcomeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GameResultOverviewDto
+     */
+    'startTime'?: string;
+}
+
+export const GameResultOverviewDtoOutcomeEnum = {
+    Win: 'WIN',
+    Loss: 'LOSS',
+    Push: 'PUSH'
+} as const;
+
+export type GameResultOverviewDtoOutcomeEnum = typeof GameResultOverviewDtoOutcomeEnum[keyof typeof GameResultOverviewDtoOutcomeEnum];
+
+/**
+ * 
+ * @export
  * @interface GameSessionCreationRequestDto
  */
 export interface GameSessionCreationRequestDto {
@@ -258,8 +292,42 @@ export const GameResultsApiAxiosParamCreator = function (configuration?: Configu
         getGameResultForSession: async (sessionId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'sessionId' is not null or undefined
             assertParamExists('getGameResultForSession', 'sessionId', sessionId)
-            const localVarPath = `/game-sessions/{sessionId}/game-results`
+            const localVarPath = `/game-results/session/{sessionId}`
                 .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all game results for a specific player
+         * @param {number} playerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getResultsForPlayer: async (playerId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'playerId' is not null or undefined
+            assertParamExists('getResultsForPlayer', 'playerId', playerId)
+            const localVarPath = `/game-results/player/{playerId}`
+                .replace(`{${"playerId"}}`, encodeURIComponent(String(playerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -305,6 +373,19 @@ export const GameResultsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['GameResultsApi.getGameResultForSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Get all game results for a specific player
+         * @param {number} playerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getResultsForPlayer(playerId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GameResultOverviewDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getResultsForPlayer(playerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GameResultsApi.getResultsForPlayer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -324,6 +405,16 @@ export const GameResultsApiFactory = function (configuration?: Configuration, ba
          */
         getGameResultForSession(sessionId: number, options?: RawAxiosRequestConfig): AxiosPromise<GameResultDto> {
             return localVarFp.getGameResultForSession(sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all game results for a specific player
+         * @param {number} playerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getResultsForPlayer(playerId: number, options?: RawAxiosRequestConfig): AxiosPromise<GameResultOverviewDto> {
+            return localVarFp.getResultsForPlayer(playerId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -345,6 +436,18 @@ export class GameResultsApi extends BaseAPI {
      */
     public getGameResultForSession(sessionId: number, options?: RawAxiosRequestConfig) {
         return GameResultsApiFp(this.configuration).getGameResultForSession(sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all game results for a specific player
+     * @param {number} playerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GameResultsApi
+     */
+    public getResultsForPlayer(playerId: number, options?: RawAxiosRequestConfig) {
+        return GameResultsApiFp(this.configuration).getResultsForPlayer(playerId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
