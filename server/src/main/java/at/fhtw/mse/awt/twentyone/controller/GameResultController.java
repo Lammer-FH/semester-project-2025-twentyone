@@ -19,7 +19,7 @@ import java.util.List;
 // import java.util.List; // No longer returning a list
 
 @RestController
-@RequestMapping("/game-sessions/{sessionId}/game-results") // Path kept as per spec
+@RequestMapping("/game-results")
 @Tag(name = "Game Results", description = "Result for a completed game session")
 public class GameResultController {
 
@@ -33,24 +33,23 @@ public class GameResultController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Game result retrieved successfully.",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GameResultDto.class))), // Singular DTO
+                            schema = @Schema(implementation = GameResultDto.class))),
             @ApiResponse(responseCode = "404", description = "Game session or game result not found")
     })
-    @GetMapping
+    @GetMapping("/session/{sessionId}")
     public GameResultDto getGameResultForSession(@PathVariable("sessionId") Long sessionId) {
         return gameResultService.getGameResultBySessionId(sessionId);
     }
 
-    @Operation(summary = "Get the game results for a specific playerId")
+    @Operation(summary = "Get all game results for a specific player")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "GameResultOverviewDto result retrieved successfully.",
+            @ApiResponse(responseCode = "200", description = "Game results retrieved successfully.",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GameResultDto.class))), // Singular DTO
-            @ApiResponse(responseCode = "404", description = "Game or player not found")
+                            schema = @Schema(implementation = GameResultOverviewDto.class))),
+            @ApiResponse(responseCode = "404", description = "Player not found")
     })
-    @GetMapping
+    @GetMapping("/player/{playerId}")
     public List<GameResultOverviewDto> getResultsForPlayer(@PathVariable("playerId") Long playerId) {
         return gameResultService.getResultsForPlayer(playerId);
     }
-
 }
