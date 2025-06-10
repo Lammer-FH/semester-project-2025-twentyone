@@ -1,6 +1,7 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
 import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultDto;
+import at.fhtw.mse.awt.twentyone.dtos.gameResult.GameResultOverviewDto;
 import at.fhtw.mse.awt.twentyone.interfaces.GameResultService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 // import java.util.List; // No longer returning a list
 
@@ -34,9 +37,20 @@ public class GameResultController {
             @ApiResponse(responseCode = "404", description = "Game session or game result not found")
     })
     @GetMapping
-    public GameResultDto getGameResultForSession(@PathVariable Long sessionId) {
-
+    public GameResultDto getGameResultForSession(@PathVariable("sessionId") Long sessionId) {
         return gameResultService.getGameResultBySessionId(sessionId);
-
     }
+
+    @Operation(summary = "Get the game results for a specific playerId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "GameResultOverviewDto result retrieved successfully.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GameResultDto.class))), // Singular DTO
+            @ApiResponse(responseCode = "404", description = "Game or player not found")
+    })
+    @GetMapping
+    public List<GameResultOverviewDto> getResultsForPlayer(@PathVariable("playerId") Long playerId) {
+        return gameResultService.getResultsForPlayer(playerId);
+    }
+
 }
