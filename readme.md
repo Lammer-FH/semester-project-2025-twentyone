@@ -71,10 +71,6 @@ App erreichbar unter: `http://localhost:5173`
 
 ---
 
-## 🚧 Projektstatus
-
-🟡 In Arbeit  
-🔜 User Stories 1-3
 
 ## 👥 Team
 
@@ -85,5 +81,5 @@ App erreichbar unter: `http://localhost:5173`
 
 ---
 
-> Advanced Web Frameworks 2025 · FHTW Wien  
+> Advanced Web Technologies · MSE SS-25 · FHTW Wien  
 > Gruppe: `at.fhtw.swe.swt.twentyone`
