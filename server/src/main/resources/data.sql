@@ -42,3 +42,6 @@ INSERT INTO game_results (game_result_id, game_session_id, outcome, payout) VALU
                                                                                 (13, 13, 'LOSS',  0.00),
                                                                                 (14, 14, 'WIN',  27.50),
                                                                                 (15, 15, 'PUSH', 10.00);
+
+-- heheheh
+ALTER TABLE game_sessions ALTER COLUMN id RESTART WITH 16;
