@@ -45,7 +45,6 @@ class GameSessionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        // Create common test objects to reuse in tests
         testPlayer = new Player(10L, "tester", "Test Player", "hash");
         testGameSession = new GameSession(1L, testPlayer, GameSessionStatus.ACTIVE, LocalDateTime.now(), null, null);
     }
@@ -62,7 +61,7 @@ class GameSessionServiceImplTest {
         assertThat(dto).isNotNull();
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getPlayerId()).isEqualTo(testPlayer.getPlayerId());
-        assertThat(dto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE.name());
+        assertThat(dto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE);
     }
 
     @Test
@@ -81,7 +80,6 @@ class GameSessionServiceImplTest {
         // Arrange
         GameSessionCreationRequestDto requestDto = new GameSessionCreationRequestDto(testPlayer.getPlayerId());
         when(playerRepository.findById(testPlayer.getPlayerId())).thenReturn(Optional.of(testPlayer));
-        // Mock the save operation to return the object it was given
         when(gameSessionRepository.save(any(GameSession.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // Act
@@ -90,7 +88,7 @@ class GameSessionServiceImplTest {
         // Assert
         assertThat(createdDto).isNotNull();
         assertThat(createdDto.getPlayerId()).isEqualTo(testPlayer.getPlayerId());
-        assertThat(createdDto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE.name());
+        assertThat(createdDto.getStatus()).isEqualTo(GameSessionStatus.ACTIVE);
         verify(gameSessionRepository, times(1)).save(any(GameSession.class));
     }
 
@@ -119,7 +117,7 @@ class GameSessionServiceImplTest {
 
         // Assert
         assertThat(updatedDto).isNotNull();
-        assertThat(updatedDto.getStatus()).isEqualTo(GameSessionStatus.ENDED.name());
+        assertThat(updatedDto.getStatus()).isEqualTo(GameSessionStatus.ENDED);
         assertThat(updatedDto.getEndTime()).isNotNull();
         verify(gameSessionRepository, times(1)).save(testGameSession);
     }

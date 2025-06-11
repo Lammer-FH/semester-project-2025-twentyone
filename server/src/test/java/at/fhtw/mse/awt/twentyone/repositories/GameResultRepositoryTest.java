@@ -35,13 +35,11 @@ class GameResultRepositoryTest {
         Player player = new Player(null, "player1", "Test Player One", "hash1");
         player = playerRepository.save(player);
 
-
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
-        session.setPlayer(player); // Set the required Player
-        session.setStatus(GameSessionStatus.ENDED); // Set a required status
+        session.setPlayer(player);
+        session.setStatus(GameSessionStatus.ENDED);
         gameSessionRepository.save(session);
-
 
         GameResult result = new GameResult();
         result.setGameSession(session);
@@ -62,10 +60,9 @@ class GameResultRepositoryTest {
 
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
-        session.setPlayer(player); // Set the required Player
-        session.setStatus(GameSessionStatus.ENDED); // Set a required status
+        session.setPlayer(player);
+        session.setStatus(GameSessionStatus.ENDED);
         session = gameSessionRepository.save(session);
-
 
         GameResult result = new GameResult();
         result.setGameSession(session);

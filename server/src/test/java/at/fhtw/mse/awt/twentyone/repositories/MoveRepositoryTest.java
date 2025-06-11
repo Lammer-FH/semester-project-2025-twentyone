@@ -30,17 +30,14 @@ class MoveRepositoryTest {
 
     @Test
     void shouldFindMovesByGameSessionId() {
-
         Player player = new Player(null, "testplayer", "Test Player", "hash");
         player = playerRepository.save(player);
 
-
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
-        session.setPlayer(player); // Set the required Player
-        session.setStatus(GameSessionStatus.ACTIVE); // Set the required status
+        session.setPlayer(player);
+        session.setStatus(GameSessionStatus.ACTIVE);
         session = gameSessionRepository.save(session);
-
 
         Move move = new Move();
         move.setGameSession(session);

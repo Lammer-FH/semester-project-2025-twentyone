@@ -24,23 +24,19 @@ class CardRepositoryTest {
     @Autowired
     private GameSessionRepository gameSessionRepository;
 
-    @Autowired // Add this
+    @Autowired
     private PlayerRepository playerRepository;
 
     @Test
     void shouldReturnCardsByGameSessionId() {
-
         Player player = new Player(null, "testplayer", "Test Player", "hash");
         player = playerRepository.save(player);
-
 
         GameSession session = new GameSession();
         session.setStartTime(LocalDateTime.now());
 
-
         session.setPlayer(player);
         session.setStatus(GameSessionStatus.ACTIVE);
-
 
         session = gameSessionRepository.save(session);
 
@@ -51,12 +47,10 @@ class CardRepositoryTest {
         card.setPosition(1);
         cardRepository.save(card);
 
-        // --- ACT ---
         List<Card> result = cardRepository.findByGameSession_Id(session.getId());
 
-        // --- ASSERT ---
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getRank()).isEqualTo("A"); // Using get(0) as you had
+        assertThat(result.get(0).getRank()).isEqualTo("A");
         assertThat(result.get(0).getSuit()).isEqualTo("HEARTS");
     }
 }

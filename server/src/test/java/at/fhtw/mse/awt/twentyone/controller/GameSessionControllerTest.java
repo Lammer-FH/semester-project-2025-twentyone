@@ -33,7 +33,7 @@ class GameSessionControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper; // Helper to convert objects to JSON
+    private ObjectMapper objectMapper;
 
     @MockBean
     private GameSessionService gameSessionService;
@@ -87,7 +87,7 @@ class GameSessionControllerTest {
     }
 
     @Test
-    void testUpdateGameSession_shouldReturnOk() throws Exception {
+    void testUpdateGameSession_shouldReturnEnded() throws Exception {
         // Arrange
         Long sessionId = 1L;
         GameSessionUpdateRequestDto requestDto = new GameSessionUpdateRequestDto(GameSessionStatus.ENDED);
@@ -100,7 +100,7 @@ class GameSessionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("PLAYER_WINS"));
+                .andExpect(jsonPath("$.status").value("ENDED"));
     }
 
     @Test
