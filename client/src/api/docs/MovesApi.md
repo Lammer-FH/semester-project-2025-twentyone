@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8080/twentyone/api*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createMove**](#createmove) | **POST** /game-sessions/{sessionId}/moves | Create a new move|
+|[**createMove**](#createmove) | **POST** /game-sessions/{sessionId}/moves | Create a new move for a session|
 |[**getMoves**](#getmoves) | **GET** /game-sessions/{sessionId}/moves | Get all moves for a session|
 
 # **createMove**
-> MoveDto createMove(moveDto)
+> MoveDto createMove(moveCreationRequestDto)
 
 
 ### Example
@@ -17,16 +17,18 @@ All URIs are relative to *http://localhost:8080/twentyone/api*
 import {
     MovesApi,
     Configuration,
-    MoveDto
+    MoveCreationRequestDto
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new MovesApi(configuration);
 
-let moveDto: MoveDto; //
+let sessionId: number; // (default to undefined)
+let moveCreationRequestDto: MoveCreationRequestDto; //
 
 const { status, data } = await apiInstance.createMove(
-    moveDto
+    sessionId,
+    moveCreationRequestDto
 );
 ```
 
@@ -34,7 +36,8 @@ const { status, data } = await apiInstance.createMove(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **moveDto** | **MoveDto**|  | |
+| **moveCreationRequestDto** | **MoveCreationRequestDto**|  | |
+| **sessionId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type
@@ -73,11 +76,18 @@ import {
 const configuration = new Configuration();
 const apiInstance = new MovesApi(configuration);
 
-const { status, data } = await apiInstance.getMoves();
+let sessionId: number; // (default to undefined)
+
+const { status, data } = await apiInstance.getMoves(
+    sessionId
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sessionId** | [**number**] |  | defaults to undefined|
 
 
 ### Return type

@@ -83,7 +83,7 @@ const {
 } = useBlackjack()
 
 onMounted(() => {
-  startNewGame()
+  startNewGame(123)
 })
 </script>
 

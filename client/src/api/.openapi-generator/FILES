@@ -12,6 +12,7 @@ docs/GameSessionCreationRequestDto.md
 docs/GameSessionDto.md
 docs/GameSessionUpdateRequestDto.md
 docs/LoginRequestDto.md
+docs/MoveCreationRequestDto.md
 docs/MoveDetailsApi.md
 docs/MoveDto.md
 docs/MovesApi.md
