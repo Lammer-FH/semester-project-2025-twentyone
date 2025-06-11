@@ -1,4 +1,4 @@
-package at.fhtw.mse.awt.twentyone.controller;
+package at.fhtw.mse.awt.twentyone.controllers;
 
 import at.fhtw.mse.awt.twentyone.dtos.move.MoveCreationRequestDto;
 import at.fhtw.mse.awt.twentyone.dtos.move.MoveDto;

@@ -1,4 +1,4 @@
-package at.fhtw.mse.awt.twentyone.controller;
+package at.fhtw.mse.awt.twentyone.controllers;
 
 import at.fhtw.mse.awt.twentyone.dtos.player.PlayerDto;
 import at.fhtw.mse.awt.twentyone.dtos.player.PlayerRequestDto;
