@@ -4,6 +4,7 @@ import at.fhtw.mse.awt.twentyone.entities.GameSession;
 import at.fhtw.mse.awt.twentyone.entities.Move;
 import at.fhtw.mse.awt.twentyone.entities.Player;
 import at.fhtw.mse.awt.twentyone.enums.GameSessionStatus;
+import at.fhtw.mse.awt.twentyone.enums.MoveType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -43,14 +44,14 @@ class MoveRepositoryTest {
 
         Move move = new Move();
         move.setGameSession(session);
-        move.setMoveType("hit");
+        move.setMoveType(MoveType.HIT);
         move.setOccuredAt(LocalDateTime.now());
         moveRepository.save(move);
 
         List<Move> result = moveRepository.findByGameSession_Id(session.getId());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getMoveType()).isEqualTo("hit"); // Using get(0) as you had
-        assertThat(result.get(0).getGameSession().getId()).isEqualTo(session.getId());
+        assertThat(result.getFirst().getMoveType()).isEqualTo(MoveType.HIT);
+        assertThat(result.getFirst().getGameSession().getId()).isEqualTo(session.getId());
     }
 }

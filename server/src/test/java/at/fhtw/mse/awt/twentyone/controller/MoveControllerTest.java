@@ -1,6 +1,7 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
 import at.fhtw.mse.awt.twentyone.dtos.move.MoveDto;
+import at.fhtw.mse.awt.twentyone.enums.MoveType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ class MoveControllerTest {
     @Test
     void shouldCreateMove() throws Exception {
         Long sessionId = 2L;
-        MoveDto move = new MoveDto(99L, sessionId, "stand", LocalDateTime.now());
+        MoveDto move = new MoveDto(99L, sessionId, MoveType.STAND, LocalDateTime.now());
 
         mockMvc.perform(post("/game-sessions/{sessionId}/moves", sessionId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -47,6 +48,6 @@ class MoveControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(99))
                 .andExpect(jsonPath("$.gameSessionId").value(sessionId))
-                .andExpect(jsonPath("$.moveType").value("stand"));
+                .andExpect(jsonPath("$.moveType").value(MoveType.STAND));
     }
 }

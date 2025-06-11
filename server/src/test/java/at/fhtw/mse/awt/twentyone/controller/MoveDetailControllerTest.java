@@ -1,6 +1,7 @@
 package at.fhtw.mse.awt.twentyone.controller;
 
 import at.fhtw.mse.awt.twentyone.dtos.move.MoveDto;
+import at.fhtw.mse.awt.twentyone.enums.MoveType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class MoveDetailControllerTest {
 
     @Test
     void shouldUpdateMove() throws Exception {
-        MoveDto moveDto = new MoveDto(1L, 2L, "hit", LocalDateTime.now());
+        MoveDto moveDto = new MoveDto(1L, 2L, MoveType.HIT, LocalDateTime.now());
 
         mockMvc.perform(put("/moves/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -34,7 +35,7 @@ class MoveDetailControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.gameSessionId").value(2))
-                .andExpect(jsonPath("$.moveType").value("hit"));
+                .andExpect(jsonPath("$.moveType").value(MoveType.HIT));
     }
 
     @Test
